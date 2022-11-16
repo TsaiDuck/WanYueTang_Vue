@@ -1,7 +1,7 @@
 <template>
   <div class="nav-logo">
     <div class="yellow-moon">
-      <img src="../../../images/logos/黄月.png" width="100%" alt="" />
+      <a href="#/home"><img src="../../../images/logos/黄月.png" width="100%" alt="" /></a>
     </div>
   </div>
 </template>

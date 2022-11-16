@@ -6,12 +6,12 @@
     </div>
     <!-- 导航栏内容 -->
     <div class="nav-body">
-      <ul class="nav-body-ul">
-        <li><a href="">首页</a></li>
-        <li><a href="">发热科</a></li>
-        <li><a href="">消化内科</a></li>
-        <li><a href="">妇产科</a></li>
-        <li><a href="">男科</a></li>
+      <ul class="nav-body-ul" ref="nav_body">
+        <li><a :class="{ active: hashPath === '/home' }" href="#/home">首页</a></li>
+        <li><a :class="{ active: hashPath === '/fever' }" href="#/fever">发热科</a></li>
+        <li><a :class="{ active: hashPath === '/digestion' }" href="#/digestion">消化内科</a></li>
+        <li><a :class="{ active: hashPath === '/OGDepartment' }" href="#/OGDepartment">妇产科</a></li>
+        <li><a :class="{ active: hashPath === '/andrology' }" href="#/andrology">男科</a></li>
       </ul>
     </div>
     <!-- 搜索框 -->
@@ -36,9 +36,18 @@ export default {
     LogoYellowMoon
   },
   data() {
-    return {}
+    return {
+      hashPath: '/home'
+    }
   },
-  methods: {}
+  // 监听,当路由发生变化的时候执行
+  watch: {
+    $route: {
+      handler: function (val) {
+        this.hashPath = val.path
+      }
+    }
+  }
 }
 </script>
 
@@ -65,19 +74,22 @@ export default {
     li {
       float: left;
       list-style: none;
-      display: block;
-      padding: 36px 35px;
-      font-size: 20px;
-      cursor: pointer;
-      line-height: -20px;
       a {
         text-decoration: none;
+        display: block;
+        padding: 36px 35px;
+        font-size: 20px;
+        cursor: pointer;
+        line-height: -20px;
         color: #000;
+      }
+      .active {
+        background-color: darkgreen;
+        color: #fff;
       }
     }
     li:hover {
       background-color: darkgreen;
-
       a {
         color: #fff;
       }

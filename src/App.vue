@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <!-- 导航栏 -->
-    <div class="nav"></div>
-    <el-row>
-      <el-col :span="24">
-        <div class="grid-content bg-purple-dark">
-          <Navigation></Navigation>
-          <HomePage></HomePage>
-        </div>
-      </el-col>
-    </el-row>
+    <div class="nav">
+      <el-row>
+        <el-col :span="24">
+          <div class="grid-content bg-purple-dark">
+            <Navigation></Navigation>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
     <!-- 内容区 -->
     <div class="body">
       <router-view></router-view>
