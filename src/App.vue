@@ -6,6 +6,7 @@
       <el-col :span="24">
         <div class="grid-content bg-purple-dark">
           <Navigation></Navigation>
+          <HomePage></HomePage>
         </div>
       </el-col>
     </el-row>
