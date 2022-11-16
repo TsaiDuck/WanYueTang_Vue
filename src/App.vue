@@ -1,32 +1,36 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <!-- 导航栏 -->
+    <div class="nav"></div>
+    <el-row>
+      <el-col :span="24">
+        <div class="grid-content bg-purple-dark">
+          <Navigation></Navigation>
+        </div>
+      </el-col>
+    </el-row>
+    <!-- 内容区 -->
+    <div class="body">
+      <router-view></router-view>
+    </div>
+    <!-- 尾部区 -->
+    <div class="footer"></div>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+import Navigation from '@/components/header/nav/Navigation.vue'
+import HomePage from '@/components/body/home/Home.vue'
+export default {
+  components: {
+    Navigation,
+    HomePage
   }
+}
+</script>
+
+<style lang="less">
+.nav {
+  box-shadow: 0px 2px 0px lightgray;
 }
 </style>
