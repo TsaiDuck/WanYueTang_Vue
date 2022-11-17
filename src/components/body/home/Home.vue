@@ -11,11 +11,17 @@
           v-show="item.id===currentIndex"
     >
     <!--左侧按钮-->
-    <div  @click="clickIcon('left')"   class="iconDiv icon-left">
+    <div  @click="clickIcon('left')"
+          class="iconDiv icon-left"
+          @mouseover="changeInterval(true)"
+          @mouseleave="changeInterval(false)">
       <i class="el-icon-arrow-left"></i>
     </div>
     <!--右侧按钮-->
-    <div  @click="clickIcon('right')"  class="iconDiv icon-right">
+    <div  @click="clickIcon('right')"
+          class="iconDiv icon-right"
+          @mouseover="changeInterval(true)"
+          @mouseleave="changeInterval(false)">
       <i class="el-icon-arrow-right"></i>
     </div>
     <!--控制圆点-->
@@ -44,7 +50,15 @@ export default {
         },
         {
           id:1,
+          link: require("@/images/test/img2.jpg"),
+        },
+        {
+          id:2,
           link: require("@/images/test/img1.jpg"),
+        },
+        {
+          id:3,
+          link: require("@/images/test/img2.jpg"),
         },
       ]
     }
@@ -107,8 +121,8 @@ li {
 }
 .showImg{
   position: relative;
-  width: 80%;
-  height: 450px;
+  width: 85%;
+  height: 530px;
   margin: 0 auto;
   overflow: hidden;
 }
