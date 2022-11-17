@@ -23,8 +23,7 @@
 import Navigation from '@/components/header/nav/Navigation.vue'
 export default {
   components: {
-    Navigation,
-    HomePage
+    Navigation
   }
 }
 </script>
