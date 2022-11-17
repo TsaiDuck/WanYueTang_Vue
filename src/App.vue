@@ -9,15 +9,19 @@
       <router-view></router-view>
     </div>
     <!-- 尾部区 -->
-    <div class="footer"></div>
+    <div class="footer">
+      <Footer/>
+    </div>
   </div>
 </template>
 
 <script>
 import Navigation from '@/components/header/nav/Navigation.vue'
+import Footer from '@/components/footer/Footer.vue'
 export default {
   components: {
-    Navigation
+    Navigation,
+    Footer
   }
 }
 </script>
