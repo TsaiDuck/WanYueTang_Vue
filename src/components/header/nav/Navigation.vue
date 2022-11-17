@@ -21,9 +21,9 @@
     </div>
     <!-- 登陆注册内容 -->
     <div class="nav-user">
-      <a href="#" class="nav-user-login">登录</a>
+      <a href="#/login" class="nav-user-login">登录</a>
       &emsp;<b class="el-icon-user-solid">&emsp;</b>
-      <a href="#" class="nav-user-register">注册</a>
+      <a href="#/register" class="nav-user-register">注册</a>
     </div>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      hashPath: '/home'
+      hashPath: this.$route.path
     }
   },
   // 监听,当路由发生变化的时候执行

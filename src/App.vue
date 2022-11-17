@@ -21,7 +21,6 @@
 
 <script>
 import Navigation from '@/components/header/nav/Navigation.vue'
-import HomePage from '@/components/body/home/Home.vue'
 export default {
   components: {
     Navigation,
