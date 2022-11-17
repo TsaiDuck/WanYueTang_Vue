@@ -11,15 +11,15 @@
           v-show="item.id===currentIndex"
     >
     <!--左侧按钮-->
-    <div  @click="clickIcon('up')"   class="iconDiv icon-left">
+    <div  @click="clickIcon('left')"   class="iconDiv icon-left">
       <i class="el-icon-arrow-left"></i>
     </div>
     <!--右侧按钮-->
-    <div  @click="clickIcon('down')"  class="iconDiv icon-right">
+    <div  @click="clickIcon('right')"  class="iconDiv icon-right">
       <i class="el-icon-arrow-right"></i>
     </div>
-    <!--控制方形-->
-    <div class="banner-squre">
+    <!--控制圆点-->
+    <div class="banner-circle">
       <ul>
         <li @click="changeImg(item.id)"
             v-for="(item) in imgArr"
@@ -40,11 +40,11 @@ export default {
       imgArr:[
         {
           id:0,
-          link: require("@/assets/logo.png"),
+          link: require("@/images/test/img1.jpg"),
         },
         {
           id:1,
-          link: require("@/assets/logo.png"),
+          link: require("@/images/test/img1.jpg"),
         },
       ]
     }
@@ -63,7 +63,7 @@ export default {
     },
     // 点击左右箭头
     clickIcon(val){
-      if(val==='down'){
+      if(val==='right'){
         this.currentIndex++;
         if(this.currentIndex===this.imgArr.length){
           this.currentIndex = 0;
@@ -108,7 +108,7 @@ li {
 .showImg{
   position: relative;
   width: 80%;
-  height: 400px;
+  height: 450px;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -120,20 +120,19 @@ li {
 
 /* 箭头图标 */
 .iconDiv{
-  padding-top: 15px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 30px;
+  width: 35px;
   height: 50px;
-  background-color: rgba(125,125,125,.2);
-  line-height: 30px;
+  background-color: transparent;
+  line-height: 50px;
   text-align: center;
-  font-size: 25px;
+  font-size: 30px;
   cursor: pointer;
 }
 .iconDiv:hover{
-  background-color: white;
+  background-color: rgba(125,125,125,0.8);
 }
 .icon-left{
   left: 10px;
@@ -143,24 +142,24 @@ li {
 }
 
 /* 控制圆点 */
-.banner-squre{
+.banner-circle{
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 20px;
 }
-.banner-squre ul{
+.banner-circle ul{
   margin: 0 50px;
   height: 100%;
   text-align: right;
 }
-.banner-squre ul li{
+.banner-circle ul li{
   display: inline-block;
   width: 14px;
   height: 14px;
   margin: 0 5px;
   border-radius: 7px;
-  background-color: rgba(125,125,125,.8);
+  background-color: rgba(125,125,125,0.8);
   cursor: pointer;
 }
 .active{
