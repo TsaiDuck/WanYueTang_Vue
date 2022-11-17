@@ -2,13 +2,7 @@
   <div id="app">
     <!-- 导航栏 -->
     <div class="nav">
-      <el-row>
-        <el-col :span="24">
-          <div class="grid-content bg-purple-dark">
-            <Navigation></Navigation>
-          </div>
-        </el-col>
-      </el-row>
+      <Navigation></Navigation>
     </div>
     <!-- 内容区 -->
     <div class="body">
