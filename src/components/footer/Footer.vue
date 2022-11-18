@@ -13,10 +13,10 @@
       <span>互联网药品信息服务资格证编号(京)-经营性-114514</span><br/>
       <span>互联网出版许可证编号新出网证(京)字144514号</span><span class="span">|</span>
       <span>出版物经营许可证</span><span class="span">|</span>
-      <span>网络文化经营许可证京网文144514号</span><span class="span">|</span>
+      <span>网络文化经营许可证京网文114514号</span><span class="span">|</span>
       <span>违法和不良信息举报电话：114514</span><br/>
       <span>Copyright&copy;&nbsp;2022&nbsp;万月堂版权所有</span><span class="span">|</span>
-      <span>消费者维权热线：4006067733</span>
+      <span>消费者维权热线：114514</span>
     </div>
   </div>
 </template>
@@ -37,30 +37,30 @@ export default {}
     height: 110px;
     text-align: center;
     font-size: 13px;
-  }
-  .footer hr{
-    width: 100%;
-    border-top: 1px solid rgba(169, 169, 169, 0.46);
-  }
-  .footer a{
-    color: #666666;
-    text-decoration: none;
-    vertical-align: middle;
+    hr{
+      width: 100%;
+      border-top: 1px solid rgba(169, 169, 169, 0.46);
+    }
+    a{
+      color: #666666;
+      text-decoration: none;
+      vertical-align: middle;
+    }
+    a:hover{
+      color: darkgreen;
+    }
   }
   .span{
     vertical-align: middle;
     margin: 0 10px;
-  }
-  .footer a:hover{
-    color: darkgreen;
   }
   .footer-top{
     padding-top: 10px;
   }
   .footer-bottom{
     padding-top: 10px;
-  }
-  .footer-bottom a{
-    color: darkgray;
+    a{
+      color: darkgray;
+    }
   }
 </style>
