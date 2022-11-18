@@ -11,7 +11,7 @@
         <li><a :class="{ active: hashPath === '/fever' }" href="#/fever">发热科</a></li>
         <li><a :class="{ active: hashPath === '/digestion' }" href="#/digestion">消化内科</a></li>
         <li><a :class="{ active: hashPath === '/OGDepartment' }" href="#/OGDepartment">妇产科</a></li>
-        <li><a :class="{ active: hashPath === '/andrology' }" href="#/andrology">男科</a></li>
+        <li><a :class="{ active: hashPath === '/andrology' }" href="#/andrology">乙肝</a></li>
       </ul>
     </div>
     <!-- 搜索框 -->
@@ -22,7 +22,7 @@
     <!-- 登陆注册内容 -->
     <div class="nav-user">
       <a href="#/login" class="nav-user-login">登录</a>
-      &emsp;<b class="el-icon-user-solid">&emsp;</b>
+      &emsp;<b class="el-icon-user-solid">&emsp;&nbsp;</b>
       <a href="#/register" class="nav-user-register">注册</a>
     </div>
   </div>

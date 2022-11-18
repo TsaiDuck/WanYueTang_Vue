@@ -10,7 +10,7 @@
     </div>
     <!-- 尾部区 -->
     <div class="footer">
-      <Footer/>
+      <Footer />
     </div>
   </div>
 </template>
@@ -29,5 +29,8 @@ export default {
 <style lang="less">
 .nav {
   box-shadow: 0px 2px 0px lightgray;
+}
+#app {
+  width: 1503px;
 }
 </style>
