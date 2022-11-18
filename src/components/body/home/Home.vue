@@ -4,6 +4,7 @@
     <!--轮播图片-->
     <img  @mouseover="changeInterval(true)"
           @mouseleave="changeInterval(false)"
+          @click="into(item.url)"
           v-for="(item) in imgArr"
           :key="item.id"
           :src="item.link"
@@ -47,23 +48,31 @@ export default {
         {
           id:0,
           link: require("@/images/test/img1.jpg"),
+          url: '/register'
         },
         {
           id:1,
           link: require("@/images/test/img2.jpg"),
+          url: '/login'
         },
         {
           id:2,
           link: require("@/images/test/img1.jpg"),
+          url: '/home'
         },
         {
           id:3,
           link: require("@/images/test/img2.jpg"),
+          url: '/home'
         },
       ]
     }
   },
   methods:{
+    //跳转页面
+    into(val){
+      this.$router.push(val)
+    },
     //开启定时器
     startInterval(){
       // 事件里定时器应该先清除在设置，防止多次点击直接生成多个定时器
@@ -125,11 +134,12 @@ li {
   height: 530px;
   margin: 0 auto;
   overflow: hidden;
-}
-/* 轮播图片 */
-.showImg img{
-  width: 100%;
-  height: 100%;
+
+  /* 轮播图片 */
+  img{
+    width: 100%;
+    height: 100%;
+  }
 }
 
 /* 箭头图标 */
@@ -147,6 +157,9 @@ li {
 }
 .iconDiv:hover{
   background-color: rgba(125,125,125,0.8);
+  /deep/ i{
+    color: rgba(255,255,255,0.8);
+  }
 }
 .icon-left{
   left: 10px;
@@ -161,20 +174,22 @@ li {
   bottom: 0;
   width: 100%;
   height: 20px;
-}
-.banner-circle ul{
-  margin: 0 50px;
-  height: 100%;
-  text-align: right;
-}
-.banner-circle ul li{
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  margin: 0 5px;
-  border-radius: 7px;
-  background-color: rgba(125,125,125,0.8);
-  cursor: pointer;
+
+  ul{
+    margin: 0 50px;
+    height: 100%;
+    text-align: right;
+  }
+
+  li{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: 0 5px;
+    border-radius: 7px;
+    background-color: rgba(125,125,125,0.8);
+    cursor: pointer;
+  }
 }
 .active{
   background-color: black !important;
