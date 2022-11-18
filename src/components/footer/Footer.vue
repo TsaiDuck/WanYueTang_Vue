@@ -15,8 +15,7 @@
       <span>出版物经营许可证</span><span class="span">|</span>
       <span>网络文化经营许可证京网文114514号</span><span class="span">|</span>
       <span>违法和不良信息举报电话：114514</span><br/>
-      <span>Copyright&copy;&nbsp;2022&nbsp;万月堂版权所有</span><span class="span">|</span>
-      <span>消费者维权热线：114514</span>
+      <span>Copyright&copy;&nbsp;2022&nbsp;万月堂版权所有</span>
     </div>
   </div>
 </template>
@@ -36,7 +35,7 @@ export default {}
     width: 100%;
     height: 110px;
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
     hr{
       width: 100%;
       border-top: 1px solid rgba(169, 169, 169, 0.46);
@@ -55,7 +54,7 @@ export default {}
     margin: 0 10px;
   }
   .footer-top{
-    padding-top: 10px;
+    padding-top: 20px;
   }
   .footer-bottom{
     padding-top: 10px;
