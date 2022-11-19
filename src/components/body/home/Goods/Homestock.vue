@@ -9,6 +9,54 @@
               <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
             </div>
         </li>
+        <li class="homeStock-item">
+            <img :src="goodsImg" ref="">
+            <div class="homeStock-text">
+              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
+              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
+              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
+            </div>
+        </li>
+        <li class="homeStock-item">
+            <img :src="goodsImg" ref="">
+            <div class="homeStock-text">
+              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
+              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
+              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
+            </div>
+        </li>
+        <li class="homeStock-item">
+            <img :src="goodsImg" ref="">
+            <div class="homeStock-text">
+              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
+              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
+              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
+            </div>
+        </li>
+        <li class="homeStock-item">
+            <img :src="goodsImg" ref="">
+            <div class="homeStock-text">
+              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
+              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
+              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
+            </div>
+        </li>
+        <li class="homeStock-item">
+            <img :src="goodsImg" ref="">
+            <div class="homeStock-text">
+              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
+              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
+              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
+            </div>
+        </li>
+        <li class="homeStock-item">
+            <img :src="goodsImg" ref="">
+            <div class="homeStock-text">
+              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
+              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
+              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
+            </div>
+        </li>
       </ul>
   </div>
 </template>
@@ -49,7 +97,8 @@ export default {
       padding-left: 5px;
       display: flex;
       margin: 5px;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      //justify-content: space-between;
       .homeStock-item{
         width: 200px;
         height: 300px;
