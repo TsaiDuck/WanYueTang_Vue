@@ -2,7 +2,8 @@
   <div class="footer">
     <hr />
     <div class="footer-top">
-      <a href="#/home">首页</a><span class="span">|</span> <a href="#">关于我们</a><span class="span">|</span>
+      <a href="#/home">首页</a><span class="span">|</span>
+      <a href="#">关于我们</a><span class="span">|</span>
       <a href="#">法律声明</a><span class="span">|</span>
       <a href="#">隐私政策</a>
     </div>
