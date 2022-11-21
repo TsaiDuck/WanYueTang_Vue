@@ -32,7 +32,14 @@
         </div>
         <!-- 家中常备商品 -->
         <div class="body-home-content-homeStock-goods">
-          <Homestock></Homestock>
+          <Homestock
+            :goodsImg="require('@/images/test/img3.jpeg')"
+            :goodsName="'999感冒灵'"
+            :goodsEffect="'风寒感冒'"
+            :goodsPrice="20"
+          />
+
+
         </div>
       </div>
     </div>

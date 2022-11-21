@@ -34,6 +34,8 @@
     <div class="banner-circle">
       <ul>
         <li
+          @mouseover="changeInterval(true)"
+          @mouseleave="changeInterval(false)"
           @click="changeImg(item.id)"
           v-for="item in imgArr"
           :key="item.id"
@@ -176,14 +178,14 @@ li {
 /* 控制圆点 */
 .banner-circle {
   position: absolute;
+  padding-bottom: 20px;
   bottom: 0;
   width: 100%;
   height: 20px;
 
   ul {
-    margin: 0 50px;
     height: 100%;
-    text-align: right;
+    text-align: center;
   }
 
   li {
