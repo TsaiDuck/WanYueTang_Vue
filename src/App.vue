@@ -30,7 +30,4 @@ export default {
 .nav {
   box-shadow: 0px 2px 0px lightgray;
 }
-#app {
-  width: 1503px;
-}
 </style>

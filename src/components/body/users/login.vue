@@ -20,7 +20,7 @@
           <el-form-item label="密码">
             <el-input type="password" v-model="formLabelAlign.userPassword"></el-input>
           </el-form-item>
-          <center><el-button style="width: 125px">登录</el-button></center>
+          <center><el-button style="width: 125px" @click="login">登录</el-button></center>
         </el-form>
       </div>
       <dir></dir>
@@ -37,6 +37,13 @@ export default {
         userName: '',
         userPassword: ''
       }
+    }
+  },
+  methods: {
+    login() {
+      if (this.formLabelAlign.userName === '' || this.formLabelAlign.userPassword === '')
+        return alert('请输入用户名和密码')
+      this.$http
     }
   }
 }
