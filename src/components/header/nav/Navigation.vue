@@ -21,15 +21,22 @@
     </div>
     <!-- 登陆注册内容 -->
     <div class="nav-user">
-      <a href="#/login" class="nav-user-login">登录</a>
-      &emsp;<b class="el-icon-user-solid">&emsp;&nbsp;</b>
-      <a href="#/register" class="nav-user-register">注册</a>
+      <div class="nav-user-unLogin" v-if="!user.flag">
+        <a href="#/login" class="nav-user-login">登录</a>
+        &emsp;<b class="el-icon-user-solid">&emsp;&nbsp;</b>
+        <a href="#/register" class="nav-user-register">注册</a>
+      </div>
+      <div class="nav-user-isLogin" v-else>
+        <span>{{ user.userName }}</span>
+        <b class="el-icon-user nav-user-"></b>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import LogoYellowMoon from '@/components/header/logo/logo.vue'
+import { mapState } from 'vuex'
 export default {
   name: 'Navigation',
   components: {
@@ -47,6 +54,9 @@ export default {
         this.hashPath = val.path
       }
     }
+  },
+  computed: {
+    ...mapState(['user'])
   }
 }
 </script>
@@ -62,6 +72,7 @@ export default {
   height: 100px;
 }
 .nav-user {
+  width: 124px;
   a {
     text-decoration: none;
     color: #000;
