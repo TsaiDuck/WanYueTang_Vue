@@ -50,9 +50,50 @@
         </table>
       </div>
      <div class="button">
-       <el-button type="danger" class="el-button2" @click="info">购买</el-button>
+       <el-button type="danger" class="el-button2">购买</el-button>
        <el-button type="primary" class="el-button2">加入购物车</el-button>
      </div>
+    </div>
+    <div class="bottom">
+      <h1>药品说明书</h1>
+      <hr style="border: 1px #eeeeee solid; margin: 10px 0"/>
+      <div class="book">
+        <table class="book-table">
+          <tr>
+            <td class="td1">药品名称：</td>
+            <td class="td2">本品主要成份为：枸橼酸西地那非。<br/>其化学名称为：1-{4-乙氧基-3-[5-(6,7-二氢-1-甲基-7-氧代-3-丙基-1H-吡唑并[4,3D]嘧啶)]苯磺酰}-4-甲基哌嗪枸橼酸盐。
+
+              分子式：C22H30N6O4S·C6H8O7
+
+              分子量：666.7</td>
+          </tr>
+          <tr>
+            <td class="td1">剂型：</td>
+            <td class="td2">1</td>
+          </tr>
+          <tr>
+            <td class="td1">规格：</td>
+            <td class="td2">1</td>
+          </tr>
+          <tr>
+            <td class="td1">用法用量：</td>
+            <td class="td2">1</td>
+          </tr>
+          <tr>
+            <td class="td1">功能主治：</td>
+            <td class="td2">1</td>
+          </tr>
+          <tr>
+            <td class="td1">禁忌：</td>
+            <td class="td2">1</td>
+          </tr>
+          <tr>
+            <td class="td1">有效期：</td>
+            <td class="td2">1</td>
+          </tr>
+
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -85,13 +126,13 @@ export default {
   data(){
     return{
       count: 1,
-      goodNum: this.goodsNum
+      goodNum: this.goodsNum,
+      tableData:[
+        {adress:"1234"}
+      ]
     }
   },
   methods:{
-    info(){
-      console.log(this.$route.params)
-    },
     judge(){
       if(this.count == "" || this.count<=0 || typeof(this.count) != Number)
         this.count = 1
@@ -203,6 +244,41 @@ export default {
         width: 150px;
         height: 50px;
         font-size: 20px;
+      }
+    }
+  }
+  .bottom{
+    float: left;
+    margin-top: 30px;
+    padding: 30px;
+    border: 1px solid #e5e5e5;
+    width: 1290px;
+    h1{
+      font-weight: normal;
+      font-size: 25px;
+    }
+    .book{
+      .book-table{
+        margin: 20px auto;
+        width: 1000px;
+        border: 1px solid #e5e5e5;
+        border-collapse: collapse;
+        color: #333;
+        font-size: 16px;
+        td{
+          height: 40px;
+          line-height: 20px;
+          border: 1px solid #e5e5e5;
+          padding: 20px;
+        }
+        .td1{
+          width: 300px;
+          text-align: center;
+        }
+        .td2{
+          width: 695px;
+          text-align: left;
+        }
       }
     }
   }

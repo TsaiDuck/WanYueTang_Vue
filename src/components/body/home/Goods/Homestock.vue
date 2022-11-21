@@ -1,8 +1,8 @@
 <template>
   <div class="homeStock">
       <ul class="homeStock-list">
-        <li class="homeStock-item" v-for="item in list" :key="item.goodId">
-            <img :src="goodsImg" alt="" @click="gotoDetails(item.goodId)">
+        <li class="homeStock-item" v-for="item in list" :key="item.goodId" @click="gotoDetails(item.goodId)">
+            <img :src="goodsImg" alt="">
             <div class="homeStock-text">
               <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
               <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
