@@ -1,56 +1,8 @@
 <template>
   <div class="homeStock">
       <ul class="homeStock-list">
-        <li class="homeStock-item">
-            <img :src="goodsImg" ref="">
-            <div class="homeStock-text">
-              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
-              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
-              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
-            </div>
-        </li>
-        <li class="homeStock-item">
-            <img :src="goodsImg" ref="">
-            <div class="homeStock-text">
-              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
-              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
-              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
-            </div>
-        </li>
-        <li class="homeStock-item">
-            <img :src="goodsImg" ref="">
-            <div class="homeStock-text">
-              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
-              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
-              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
-            </div>
-        </li>
-        <li class="homeStock-item">
-            <img :src="goodsImg" ref="">
-            <div class="homeStock-text">
-              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
-              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
-              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
-            </div>
-        </li>
-        <li class="homeStock-item">
-            <img :src="goodsImg" ref="">
-            <div class="homeStock-text">
-              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
-              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
-              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
-            </div>
-        </li>
-        <li class="homeStock-item">
-            <img :src="goodsImg" ref="">
-            <div class="homeStock-text">
-              <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
-              <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
-              <span class="homeStock-text-goodsPrice">￥{{ goodsPrice }}</span>
-            </div>
-        </li>
-        <li class="homeStock-item">
-            <img :src="goodsImg" ref="">
+        <li class="homeStock-item" v-for="item in list" :key="item.goodId">
+            <img :src="goodsImg" alt="" @click="gotoDetails(item.goodId)">
             <div class="homeStock-text">
               <span class="homeStock-text-goodsName" :title="goodsName">{{ goodsName }}</span>
               <span class="homeStock-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
@@ -64,6 +16,10 @@
 <script>
 export default {
   props:{
+    goodsId:{
+      default: '',
+      type: Number
+    },
     goodsName: {
       default: '',
       type: String
@@ -82,10 +38,16 @@ export default {
     }
   },
   data(){
-
+    return{
+      list:[
+        { goodId: this.goodsId, goodName: this.goodsName}
+      ]
+    }
   },
-  computed: {
-
+  methods:{
+    gotoDetails(id){
+      this.$router.push('/goodsDetails/' + id)
+    }
   }
 }
 </script>
@@ -96,9 +58,9 @@ export default {
     .homeStock-list{
       padding-left: 5px;
       display: flex;
-      margin: 5px;
+      margin: 5px 15px 5px 5px;
       flex-wrap: wrap;
-      //justify-content: space-between;
+      justify-content: space-between;
       .homeStock-item{
         width: 200px;
         height: 300px;
@@ -126,7 +88,7 @@ export default {
             color: gray;
           }
           .homeStock-text-goodsPrice{
-            margin: 8px 0px;
+            margin: 8px 0;
             color: red;
             font-size: 18px;
           }
