@@ -33,13 +33,12 @@
         <!-- 家中常备商品 -->
         <div class="body-home-content-homeStock-goods">
           <Homestock
+            :goodsId="1"
             :goodsImg="require('@/images/test/img3.jpeg')"
             :goodsName="'999感冒灵'"
             :goodsEffect="'风寒感冒'"
             :goodsPrice="20"
           />
-
-
         </div>
       </div>
     </div>
@@ -55,7 +54,7 @@ export default {
   components: {
     Slideshow,
     DailyGoods,
-    Homestock
+    Homestock,
   }
 }
 </script>
