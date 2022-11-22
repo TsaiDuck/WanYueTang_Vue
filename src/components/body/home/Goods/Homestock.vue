@@ -69,7 +69,6 @@
         </div>
       </li>
     </ul>
-    >>>>>>> e19c2707063fea229c3d49b4dc539d3ffbf95f50
   </div>
 </template>
 
