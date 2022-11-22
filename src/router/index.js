@@ -6,6 +6,7 @@ import Register from '@/components/body/users/register.vue'
 import GoodsDetails from '@/components/body/home/Goods/GoodsDetails'
 import userHome from '@/components/body/users/userHome'
 import userCart from '@/components/body/users/userCart'
+import userInfo from '@/components/body/users/userInfo'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,12 @@ const routes = [
   { path: '/login', name: 'login', component: Login },
   { path: '/register', name: 'register', component: Register },
   { path: '/goodsDetails/:id', name: 'goodsDetails', component: GoodsDetails },
-  { path: '/userHome', name: 'userHome', component: userHome },
+  {
+    path: '/userHome',
+    name: 'userHome',
+    component: userHome,
+    children: [{ path: 'userInfo', name: 'userInfo', component: userInfo }]
+  },
   { path: '/userCart', name: 'userCart', component: userCart }
 ]
 
