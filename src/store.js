@@ -10,6 +10,14 @@ export default new Vuex.Store({
       userName: ''
     }
   },
-  mutations: {},
+  mutations: {
+    login(state, loginUser) {
+      state.user.userName = loginUser.userName
+      state.user.flag = true
+    },
+    logout(state) {
+      state.user.flag = false
+    }
+  },
   actions: {}
 })

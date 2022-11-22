@@ -26,9 +26,19 @@
         &emsp;<b class="el-icon-user-solid">&emsp;&nbsp;</b>
         <a href="#/register" class="nav-user-register">注册</a>
       </div>
-      <div class="nav-user-isLogin" v-else>
-        <span>{{ user.userName }}</span>
-        <b class="el-icon-user nav-user-"></b>
+      <div class="nav-user-isLogin" @mouseenter="showUserInfo" @mouseleave="hideUserInfo" v-else>
+        <!-- &emsp; -->
+        <b class="el-icon-user" :title="user.userName"></b>
+        <!-- &nbsp; -->
+        <!-- <span>{{ user.userName }}</span> -->
+        <div class="nav-user-info" v-if="showFlag">
+          <ul>
+            <li class="nav-user-info-head">用户：{{ user.userName }}</li>
+            <li @click="linkTo('/userHome')">个人主页</li>
+            <li @click="linkTo('/userCart')">购物车</li>
+            <li @click="userLogout">退出登录</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -36,7 +46,7 @@
 
 <script>
 import LogoYellowMoon from '@/components/header/logo/logo.vue'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Navigation',
   components: {
@@ -44,7 +54,8 @@ export default {
   },
   data() {
     return {
-      hashPath: this.$route.path
+      hashPath: this.$route.path,
+      showFlag: false
     }
   },
   // 监听,当路由发生变化的时候执行
@@ -57,6 +68,22 @@ export default {
   },
   computed: {
     ...mapState(['user'])
+  },
+  methods: {
+    ...mapMutations(['logout']),
+    showUserInfo() {
+      this.showFlag = true
+    },
+    hideUserInfo() {
+      this.showFlag = false
+    },
+    linkTo(path) {
+      this.$router.push(path)
+    },
+    userLogout() {
+      this.showFlag = false
+      this.logout()
+    }
   }
 }
 </script>
@@ -76,6 +103,55 @@ export default {
   a {
     text-decoration: none;
     color: #000;
+  }
+  .nav-user-isLogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100px;
+    overflow: visible;
+    b {
+      font-size: 24px;
+      border: 1px solid black;
+      border-radius: 50%;
+      padding: 4px;
+      // cursor: pointer;
+    }
+    .nav-user-info {
+      position: absolute;
+      top: 67px;
+      background-color: #fff;
+      width: 120px;
+      border: 1px solid lightgray;
+      border-radius: 10px;
+      ul {
+        margin: 0px;
+        padding: 0px;
+        li {
+          list-style: none;
+          text-align: center;
+          display: block;
+          width: 120px;
+          cursor: pointer;
+          border-top: 1px solid lightgray;
+          padding: 8px 0px;
+        }
+        li:hover {
+          // background-color: darkgreen;
+          color: darkgreen;
+        }
+        .nav-user-info-head {
+          padding: 12px 0px;
+          cursor: default;
+          border-top: 0px;
+        }
+        .nav-user-info-head:hover {
+          // background-color: #fff;
+          color: black;
+        }
+      }
+    }
   }
 }
 .nav-body {

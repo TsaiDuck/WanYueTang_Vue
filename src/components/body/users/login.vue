@@ -23,13 +23,13 @@
           <center><el-button style="width: 125px" @click="doLogin">登录</el-button></center>
         </el-form>
       </div>
-      <dir>{{ user.flag }}</dir>
+      <div></div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data() {
     return {
@@ -41,17 +41,12 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['login']),
     async doLogin() {
       if (this.formLabelAlign.userName === '' || this.formLabelAlign.userPassword === '')
         return alert('请输入用户名和密码')
-      this.user.flag = true
-      this.user.userName = 'Ding'
+      this.login({ userName: 'Ding' })
       // 发送 Ajax 查询用户名与密码是否正确
-      // const { data: res } = await this.$http.get('/doLogin', {
-      //   username: this.userName,
-      //   userPassword: this.userPassword
-      // })
-      // console.log(res)
       this.$http
         .get('/api/doLogin', {
           username: this.userName,
