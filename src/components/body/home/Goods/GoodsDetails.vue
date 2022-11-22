@@ -1,5 +1,8 @@
 <template>
+
   <div class="goodsDetails">
+    <!--回到顶部-->
+    <el-backtop style="height: 30px;width: 30px"></el-backtop>
     <!--{{ $route.params.id }}-->
     <div class="left">
       <img src="@/images/test/img4.jpg" alt="">
@@ -191,7 +194,7 @@ export default {
     position: relative;
     float: left;
     margin-left: 50px;
-    width: 900px;
+    width: 650px;
 
     .title{
       margin-bottom: 20px;
@@ -211,12 +214,16 @@ export default {
         color: #999999;
         tr{
           padding: 13px 0;
+          td{
+            width: 80px;
+          }
           .td1{
             color: red;
             font-size: 26px;
             font-weight: bold;
           }
           .td2{
+            width: 500px;
             color: black;
             font-size: 16px;
           }
@@ -252,7 +259,7 @@ export default {
     margin-top: 30px;
     padding: 30px;
     border: 1px solid #e5e5e5;
-    width: 1290px;
+    width: 93%;
     h1{
       font-weight: normal;
       font-size: 25px;
@@ -266,8 +273,8 @@ export default {
         color: #333;
         font-size: 16px;
         td{
-          height: 40px;
-          line-height: 20px;
+          height: 30px;
+          line-height: 30px;
           border: 1px solid #e5e5e5;
           padding: 20px;
         }
@@ -276,7 +283,7 @@ export default {
           text-align: center;
         }
         .td2{
-          width: 695px;
+          width: 600px;
           text-align: left;
         }
       }
