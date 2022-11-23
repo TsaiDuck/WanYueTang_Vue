@@ -10,6 +10,13 @@ import userInfo from '@/components/body/users/userInfo'
 
 Vue.use(VueRouter)
 
+// 解决重复点击导航时控制台报错问题
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err)
+}
+
+// 挂载路由规则
 const routes = [
   { path: '/', redirect: '/home' },
   { path: '/home', name: 'home', component: Home },

@@ -5,18 +5,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // 当前登录用户
     user: {
-      flag: false,
+      isLogin: false,
       userName: ''
     }
   },
   mutations: {
     login(state, loginUser) {
       state.user.userName = loginUser.userName
-      state.user.flag = true
+      state.user.isLogin = true
     },
     logout(state) {
-      state.user.flag = false
+      state.user.isLogin = false
     }
   },
   actions: {}

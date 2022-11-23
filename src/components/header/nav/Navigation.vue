@@ -21,7 +21,7 @@
     </div>
     <!-- 登陆注册内容 -->
     <div class="nav-user">
-      <div class="nav-user-unLogin" v-if="!user.flag">
+      <div class="nav-user-unLogin" v-if="!user.isLogin">
         <a href="#/login" class="nav-user-login">登录</a>
         &emsp;<b class="el-icon-user-solid">&emsp;&nbsp;</b>
         <a href="#/register" class="nav-user-register">注册</a>
@@ -125,6 +125,7 @@ export default {
       width: 120px;
       border: 1px solid lightgray;
       border-radius: 10px;
+      z-index: 9;
       ul {
         margin: 0px;
         padding: 0px;
