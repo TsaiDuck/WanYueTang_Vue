@@ -26,6 +26,19 @@
         :count="2"
       ></Cartgoods>
     </div>
+    <!-- 结算 -->
+    <div class="userCart-aggregate">
+      <div class="userCart-aggregate-count">
+        <span>已选择</span>
+        <span class="userCart-aggregate-count-total">2</span>
+        <span>件商品</span>
+      </div>
+      <div class="userCart-aggregate-total">
+        <span>总计</span>
+        <span class="userCart-aggregate-total-price">￥100</span>
+      </div>
+      <button class="userCart-aggregate-btn">结算</button>
+    </div>
   </div>
 </template>
 
@@ -70,6 +83,37 @@ export default {
     }
     .userCart-nav-subtotal {
       width: 50px;
+    }
+  }
+  .userCart-aggregate {
+    // background: skyblue;
+    width: 380px;
+    float: right;
+    display: flex;
+    font-size: 18px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    .userCart-aggregate-count {
+      .userCart-aggregate-count-total {
+        color: red;
+        margin: 0px 3px;
+      }
+    }
+    .userCart-aggregate-total {
+      .userCart-aggregate-total-price {
+        color: red;
+      }
+    }
+    .userCart-aggregate-btn {
+      width: 100px;
+      height: 40px;
+      background-color: red;
+      color: white;
+      border: 0px;
+      border-radius: 2em;
+      font-size: 18px;
+      cursor: pointer;
     }
   }
 }
