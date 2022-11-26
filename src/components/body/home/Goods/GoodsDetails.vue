@@ -44,7 +44,7 @@
               <el-button @click="sub" style="width: 30px; height: 30px; font-size: 16px; line-height: 30px">
                 <i class="el-icon-minus"></i>
               </el-button>
-              <input type="text" v-model:value=count @blur="judge">
+              <input type="text" v-model="count" @blur="judge" @keyup="UpNumber" @keydown="UpNumber">
               <el-button @click="add" style="width: 30px; height: 30px; font-size: 16px; line-height: 30px">
                 <i class="el-icon-plus"></i>
               </el-button>
@@ -137,10 +137,14 @@ export default {
   },
   methods:{
     judge(){
-      if(this.count == "" || this.count<=0 || typeof(this.count) != Number)
+      if(this.count == "" || this.count <= 0 )
         this.count = 1
       if(this.count >= this.goodNum)
         this.count = this.goodNum
+    },
+    //只允许输入数字
+    UpNumber(e){
+      e.target.value = e.target.value.replace(/[^\d]/g,"")
     },
     add(){
       if(this.count<this.goodNum){
