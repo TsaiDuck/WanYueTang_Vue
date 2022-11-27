@@ -47,17 +47,17 @@ export default {
         return alert('请输入用户名和密码')
       this.login({ userName: 'Ding' })
       // 发送 Ajax 查询用户名与密码是否正确
-      this.$http
-        .get('/api/doLogin', {
-          username: this.userName,
-          userPassword: this.userPassword
-        })
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      // this.$http
+      //   .get('/api/doLogin', {
+      //     username: this.userName,
+      //     userPassword: this.userPassword
+      //   })
+      //   .then((res) => {
+      //     console.log(res)
+      //   })
+      //   .catch((err) => {
+      //     console.log(err)
+      //   })
     }
   },
   computed: {

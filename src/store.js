@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -9,7 +10,8 @@ export default new Vuex.Store({
     user: {
       isLogin: false,
       userName: ''
-    }
+    },
+    drug: []
   },
   mutations: {
     login(state, loginUser) {
@@ -20,5 +22,10 @@ export default new Vuex.Store({
       state.user.isLogin = false
     }
   },
-  actions: {}
+  actions: {},
+  plugins: [
+    createPersistedState({
+      storage: window.sessionStorage
+    })
+  ]
 })

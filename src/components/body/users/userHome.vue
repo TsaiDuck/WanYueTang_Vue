@@ -6,8 +6,13 @@
       <span>{{ user.userName }}</span>
       <div class="userHome-sideBar-list">
         <ul>
+          <li></li>
+          <li></li>
+          <li></li>
           <li @click="linkTo('/userHome/userInfo')">我的信息</li>
+          <li></li>
           <li>我的购物车</li>
+          <li></li>
           <li>我的订单</li>
         </ul>
       </div>

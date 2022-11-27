@@ -1,17 +1,16 @@
 <template>
-
   <div class="goodsDetails">
     <!--回到顶部-->
-    <el-backtop style="height: 30px;width: 30px"></el-backtop>
+    <el-backtop style="height: 30px; width: 30px"></el-backtop>
     <!--{{ $route.params.id }}-->
     <div class="left">
-      <img src="@/images/test/img4.jpg" alt="">
+      <img src="@/images/test/img4.jpg" alt="" />
       <span class="imgtip">温馨提醒：商品包装因厂家更换频繁，如有不符请以实物为准。</span>
     </div>
 
     <div class="right">
       <h1 class="title">健胃消食片</h1>
-      <hr style="border: 1px #e5e5e5 dashed"/>
+      <hr style="border: 1px #e5e5e5 dashed" />
       <div class="info">
         <table>
           <tr>
@@ -36,7 +35,9 @@
           </tr>
           <tr>
             <td>适<em class="em2"></em>应<em class="em2"></em>症</td>
-            <td class="td2">健胃消食。用于脾胃虚弱所致的食积，症见不思饮食、嗳腐酸臭、脘腹胀满；消化不良见上述证候者。</td>
+            <td class="td2">
+              健胃消食。用于脾胃虚弱所致的食积，症见不思饮食、嗳腐酸臭、脘腹胀满；消化不良见上述证候者。
+            </td>
           </tr>
           <tr>
             <td>数<em></em>量</td>
@@ -44,7 +45,7 @@
               <el-button @click="sub" style="width: 30px; height: 30px; font-size: 16px; line-height: 30px">
                 <i class="el-icon-minus"></i>
               </el-button>
-              <input type="text" v-model:value=count @blur="judge">
+              <input type="text" v-model="count" @blur="judge" />
               <el-button @click="add" style="width: 30px; height: 30px; font-size: 16px; line-height: 30px">
                 <i class="el-icon-plus"></i>
               </el-button>
@@ -52,23 +53,22 @@
           </tr>
         </table>
       </div>
-     <div class="button">
-       <el-button type="danger" class="el-button2">购买</el-button>
-       <el-button type="primary" class="el-button2">加入购物车</el-button>
-     </div>
+      <div class="button">
+        <el-button type="danger" class="el-button2">购买</el-button>
+        <el-button type="primary" class="el-button2">加入购物车</el-button>
+      </div>
     </div>
     <div class="bottom">
       <h1>药品说明书</h1>
-      <hr style="border: 1px #eeeeee solid; margin: 10px 0"/>
+      <hr style="border: 1px #eeeeee solid; margin: 10px 0" />
       <div class="book">
         <table class="book-table">
           <tr>
             <td class="td1">药品名称：</td>
-            <td class="td2">本品主要成份为：枸橼酸西地那非。<br/>其化学名称为：1-{4-乙氧基-3-[5-(6,7-二氢-1-甲基-7-氧代-3-丙基-1H-吡唑并[4,3D]嘧啶)]苯磺酰}-4-甲基哌嗪枸橼酸盐。
-
-              分子式：C22H30N6O4S·C6H8O7
-
-              分子量：666.7</td>
+            <td class="td2">
+              本品主要成份为：枸橼酸西地那非。<br />其化学名称为：1-{4-乙氧基-3-[5-(6,7-二氢-1-甲基-7-氧代-3-丙基-1H-吡唑并[4,3D]嘧啶)]苯磺酰}-4-甲基哌嗪枸橼酸盐。
+              分子式：C22H30N6O4S·C6H8O7 分子量：666.7
+            </td>
           </tr>
           <tr>
             <td class="td1">剂型：</td>
@@ -94,7 +94,6 @@
             <td class="td1">有效期：</td>
             <td class="td2">1</td>
           </tr>
-
         </table>
       </div>
     </div>
@@ -103,8 +102,8 @@
 
 <script>
 export default {
-  name: "GoodsDetails",
-  props:{
+  name: 'GoodsDetails',
+  props: {
     goodsName: {
       default: '',
       type: String
@@ -126,30 +125,26 @@ export default {
       type: Number
     }
   },
-  data(){
-    return{
+  data() {
+    return {
       count: 1,
       goodNum: this.goodsNum,
-      tableData:[
-        {adress:"1234"}
-      ]
+      tableData: [{ adress: '1234' }]
     }
   },
-  methods:{
-    judge(){
-      if(this.count == "" || this.count<=0 || typeof(this.count) != Number)
-        this.count = 1
-      if(this.count >= this.goodNum)
-        this.count = this.goodNum
+  methods: {
+    judge() {
+      if (this.count == '' || this.count <= 0 || typeof this.count != Number) this.count = 1
+      if (this.count >= this.goodNum) this.count = this.goodNum
     },
-    add(){
-      if(this.count<this.goodNum){
-        this.count +=1
+    add() {
+      if (this.count < this.goodNum) {
+        this.count += 1
       }
     },
-    sub(){
-      if(this.count>1){
-        this.count -=1
+    sub() {
+      if (this.count > 1) {
+        this.count -= 1
       }
     }
   }
@@ -157,11 +152,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
-*{
+* {
   margin: 0;
   padding: 0;
 }
-.goodsDetails{
+.goodsDetails {
   height: auto;
   width: 90%;
   margin: 30px auto;
@@ -169,18 +164,18 @@ export default {
   clear: both;
   zoom: 1;
   overflow: hidden;
-  .left{
+  .left {
     float: left;
     width: 400px;
     border: 1px solid #e5e5e5;
     display: block;
     position: relative;
-    img{
+    img {
       width: 390px;
       height: 390px;
       padding: 3px;
     }
-    .imgtip{
+    .imgtip {
       bottom: 5px;
       color: #999;
       left: 0;
@@ -190,13 +185,13 @@ export default {
       font-size: 14px;
     }
   }
-  .right{
+  .right {
     position: relative;
     float: left;
     margin-left: 50px;
     width: 650px;
 
-    .title{
+    .title {
       margin-bottom: 20px;
       padding: 0 20px 0 0;
       font-size: 25px;
@@ -205,84 +200,84 @@ export default {
       white-space: nowrap;
       font-weight: normal;
     }
-    .info{
-      table{
+    .info {
+      table {
         //float: left;
         border-spacing: 26px 26px;
         list-style-type: none;
         font-size: 16px;
         color: #999999;
-        tr{
+        tr {
           padding: 13px 0;
-          td{
+          td {
             width: 80px;
           }
-          .td1{
+          .td1 {
             color: red;
             font-size: 26px;
             font-weight: bold;
           }
-          .td2{
+          .td2 {
             width: 500px;
             color: black;
             font-size: 16px;
           }
-          input{
+          input {
             width: 60px;
             height: 26px;
             margin: 0 10px;
-            border: 1px solid #A6A5AA;
+            border: 1px solid #a6a5aa;
             padding: 2px;
           }
-          em{
+          em {
             padding-left: 32px;
           }
-          .em2{
+          .em2 {
             padding-left: 8px;
           }
         }
       }
     }
-    .button{
+    .button {
       text-align: center;
       height: 60px;
       line-height: 60px;
-      .el-button2{
+      .el-button2 {
         width: 150px;
         height: 50px;
         font-size: 20px;
       }
     }
   }
-  .bottom{
+  .bottom {
     float: left;
     margin-top: 30px;
     padding: 30px;
     border: 1px solid #e5e5e5;
     width: 93%;
-    h1{
+    h1 {
       font-weight: normal;
       font-size: 25px;
     }
-    .book{
-      .book-table{
+    .book {
+      .book-table {
         margin: 20px auto;
         width: 1000px;
         border: 1px solid #e5e5e5;
         border-collapse: collapse;
         color: #333;
         font-size: 16px;
-        td{
+        td {
           height: 30px;
           line-height: 30px;
           border: 1px solid #e5e5e5;
           padding: 20px;
         }
-        .td1{
+        .td1 {
           width: 300px;
           text-align: center;
         }
-        .td2{
+        .td2 {
           width: 600px;
           text-align: left;
         }
