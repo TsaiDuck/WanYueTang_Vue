@@ -70,7 +70,7 @@ export default {
         callback(new Error('请输入手机号'))
       } else {
         var checkPhone = /^1[34578]\d{9}$/
-        if (!checkPhone.test(this.ruleForm.user_phone)) {
+        if (!checkPhone.test(value)) {
           callback(new Error('请输入正确的手机号！'))
         }
         callback()
@@ -87,7 +87,7 @@ export default {
       rules: {
         user_name: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 4, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }
+          { min: 2, max: 12, message: '长度在 2 到 12 个字符', trigger: 'blur' }
         ],
         user_password: [{ validator: validatePass, trigger: 'blur' }],
         checkPass: [{ validator: validatePass2, trigger: 'blur' }],
@@ -102,6 +102,30 @@ export default {
         if (valid) {
           alert('submit!')
           console.log(this.ruleForm)
+          const userInfo = {
+            username: this.ruleForm.user_name,
+            password: this.ruleForm.user_password,
+            phone: this.ruleForm.user_phone,
+            sex: this.ruleForm.user_gender
+          }
+          // ajax
+          this.$http({
+            method: 'POST',
+            url: '/user/register',
+            data: JSON.stringify(userInfo),
+            headers: { 'Content-Type': 'application/json;charset=UTF-8' }
+          })
+            .then(({ data: res }) => {
+              if (res.code === '200') {
+                this.open('注册成功!', '现在可以登录辣', '确定')
+                this.$router.push('/login')
+              } else {
+                this.open('注册失败', '服务器发生问题了', '确定')
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            })
         } else {
           console.log('error submit!!')
           return false
@@ -110,6 +134,11 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
+    },
+    open(title, msg, btn) {
+      this.$alert(msg, title, {
+        confirmButtonText: btn
+      })
     }
   }
 }

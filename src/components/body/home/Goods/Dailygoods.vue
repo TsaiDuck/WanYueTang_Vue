@@ -2,39 +2,44 @@
   <div class="dailyGoods">
     <!-- 图片 -->
     <div class="dailyGoods-img">
-      <img :src="goodsImg" alt="" />
+      <img :src="require('.' + drugInfo.tupian)" alt="" />
     </div>
     <!-- 文字 -->
     <div class="dailyGoods-text">
-      <span class="dailyGoods-text-goodsName" :title="goodsName">{{ goodsName }}</span>
-      <span class="dailyGoods-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span>
+      <span class="dailyGoods-text-goodsName" :title="drugInfo.drugname">{{ drugInfo.drugname }}</span>
+      <!-- <span class="dailyGoods-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span> -->
       <div class="dailyGoods-text-Price">
-        <span class="dailyGoods-text-goodsNewPrice">￥{{ goodsPrice * 0.8 }}</span>
-        <span class="dailyGoods-text-goodsOldPrice">￥{{ goodsPrice }}</span>
+        <span class="dailyGoods-text-goodsNewPrice">￥{{ (drugInfo.price * 0.8).toFixed(1) }}</span>
+        <span class="dailyGoods-text-goodsOldPrice">￥{{ drugInfo.price }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   props: {
-    goodsName: {
-      default: '',
-      type: String
-    },
-    goodsEffect: {
-      default: '',
-      type: String
-    },
-    goodsPrice: {
-      default: 0,
+    id: {
+      require: true,
       type: Number
-    },
-    goodsImg: {
-      default: '',
-      type: String
     }
+  },
+  computed: {
+    ...mapState(['drug'])
+  },
+  data() {
+    return {
+      drugInfo: {}
+    }
+  },
+  methods: {
+    getDrugInfo() {
+      this.drugInfo = this.drug.filter((item) => item.drugid === this.id)[0]
+    }
+  },
+  created() {
+    this.getDrugInfo()
   }
 }
 </script>
@@ -59,6 +64,12 @@ export default {
   }
   .dailyGoods-text {
     cursor: pointer;
+    width: 150px;
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     span {
       display: block;
       width: 150px;

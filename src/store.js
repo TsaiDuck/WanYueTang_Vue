@@ -9,17 +9,34 @@ export default new Vuex.Store({
     // 当前登录用户
     user: {
       isLogin: false,
-      userName: ''
+      userName: '',
+      userPwd: ''
     },
-    drug: []
+    drug: [],
+    isLoading: false,
+    drugData: false
   },
   mutations: {
-    login(state, loginUser) {
-      state.user.userName = loginUser.userName
+    login(state, payload) {
+      state.user.userName = payload.name
+      state.user.userPwd = payload.pwd
       state.user.isLogin = true
     },
     logout(state) {
       state.user.isLogin = false
+    },
+    changeSkin(state, str) {
+      state.skin = str
+    },
+    showLoading(state) {
+      state.loadingShow = true
+    },
+    hideLoading(state) {
+      state.loadingShow = false
+    },
+    updateDrug(state, drug) {
+      state.drug = drug
+      state.drugData = true
     }
   },
   actions: {},

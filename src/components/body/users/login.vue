@@ -12,7 +12,7 @@
         <img src="../../../images/test/img3.jpeg" alt="" />
       </div>
       <!-- form 表单 -->
-      <div class="body-login-main-form">
+      <div class="body-login-main-form" v-loading="loading">
         <el-form label-position="left" label-width="80px" :model="formLabelAlign">
           <el-form-item label="用户名">
             <el-input v-model="formLabelAlign.userName"></el-input>
@@ -37,27 +37,59 @@ export default {
       formLabelAlign: {
         userName: '',
         userPassword: ''
-      }
+      },
+      loading: false
     }
   },
   methods: {
     ...mapMutations(['login']),
-    async doLogin() {
+    open(title, msg, btn) {
+      this.$alert(msg, title, {
+        confirmButtonText: btn
+      })
+    },
+    doLogin() {
+      // 如果输入框内容为空，则返回提示
       if (this.formLabelAlign.userName === '' || this.formLabelAlign.userPassword === '')
-        return alert('请输入用户名和密码')
-      this.login({ userName: 'Ding' })
+        return this.open('登陆失败', '请输入用户名和密码', '确定')
+      // 把输入内容封装成一个对象
+      const userInfo = {
+        username: this.formLabelAlign.userName,
+        password: this.formLabelAlign.userPassword
+      }
+      // 加载器
+      this.loading = true
       // 发送 Ajax 查询用户名与密码是否正确
-      // this.$http
-      //   .get('/api/doLogin', {
-      //     username: this.userName,
-      //     userPassword: this.userPassword
-      //   })
-      //   .then((res) => {
-      //     console.log(res)
-      //   })
-      //   .catch((err) => {
-      //     console.log(err)
-      //   })
+      this.$http({
+        method: 'POST',
+        url: '/user/login',
+        data: JSON.stringify(userInfo),
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        }
+      })
+        .then(({ data: res }) => {
+          console.log(res)
+          // 解除加载中
+          this.loading = false
+          // 登录成功
+          if (res.code === '200') {
+            this.open('登录成功！', `${res.data.username}欢迎您`, '确定')
+            this.login({
+              name: res.data.username,
+              pwd: this.formLabelAlign.userPassword
+            })
+            this.$router.push('/Home')
+          } else if (res.code === '-1') {
+            this.open('登陆失败', '服务器发生问题了', '取消')
+          } else this.open('登陆失败', '用户名或密码有误', '确定')
+          // 登录失败
+        })
+        .catch((err) => {
+          this.loading = false
+          console.log(err)
+          this.open('错误', err.msg, '取消')
+        })
     }
   },
   computed: {

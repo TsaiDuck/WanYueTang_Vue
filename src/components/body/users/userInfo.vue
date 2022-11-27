@@ -1,7 +1,13 @@
 <template>
   <div class="userInfo">
     <div class="userInfo-content">
-      <el-form :label-position="labelPosition" :disabled="unchangeable" label-width="80px" :model="formLabelAlign">
+      <el-form
+        :label-position="labelPosition"
+        :model="formLabelAlign"
+        :disabled="unchangeable"
+        :rules="rules"
+        label-width="80px"
+      >
         <el-form-item label="用户名">
           <el-input v-model="formLabelAlign.name"></el-input>
         </el-form-item>
@@ -17,8 +23,8 @@
         <el-form-item label="生日">
           <el-date-picker v-model="formLabelAlign.birth" type="date" placeholder="选择日期"> </el-date-picker>
         </el-form-item>
-        <el-form-item label="邮箱">
-          <el-input v-model="formLabelAlign.email" @change="checkEmail"></el-input>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="formLabelAlign.email"></el-input>
         </el-form-item>
         <el-form-item label="收货地址">
           <el-input v-model="formLabelAlign.address"></el-input>
@@ -30,8 +36,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
+    var validateEmail = (rule, value, callback) => {
+      var checker =
+        /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/
+      if (!checker.test(value)) {
+        callback(new Error('请输入正确的邮箱！'))
+      } else {
+        callback()
+      }
+    }
     return {
       labelPosition: 'left',
       unchangeable: true,
@@ -42,6 +58,9 @@ export default {
         email: '',
         address: '',
         birth: ''
+      },
+      rules: {
+        email: [{ validator: validateEmail, trigger: 'blur' }]
       }
     }
   },
@@ -50,14 +69,16 @@ export default {
       this.$prompt('请输入您的密码以确认是本人', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        inputPattern:
-          /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-        inputErrorMessage: '邮箱格式不正确'
+        inputType: 'password',
+        inputValidator: (value) => {
+          if (value === this.user.userPwd) return true
+          return '密码错误'
+        }
       })
-        .then(({ value }) => {
+        .then(() => {
           this.$message({
             type: 'success',
-            message: '你的邮箱是: ' + value
+            message: '请完善您的信息: '
           })
         })
         .catch(() => {
@@ -67,18 +88,10 @@ export default {
           })
           this.unchangeable = false
         })
-    },
-    checkEmail() {
-      const checker =
-        /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/
-      this.$refs['formLabelAlign'].validateField('email', (errorMessage) => {
-        console.log(errorMessage)
-
-        let valid = errorMessage == '' ? true : false
-
-        console.log(valid) // true/false
-      })
     }
+  },
+  computed: {
+    ...mapState(['user'])
   }
 }
 </script>

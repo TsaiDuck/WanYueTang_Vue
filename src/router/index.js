@@ -26,7 +26,7 @@ const routes = [
   { path: '/goodsDetails/:id', name: 'goodsDetails', component: GoodsDetails },
   {
     path: '/userHome',
-    name: 'userHome',
+    // name: 'userHome',
     component: userHome,
     children: [
       { path: '/', redirect: 'userInfo' },

@@ -12,15 +12,11 @@
         <div class="body-home-content-title">
           <span class="el-icon-present"></span>
           &emsp;<span>每日推荐</span>
+          <!-- <button @click="dayStockData">test</button> -->
         </div>
         <!-- 每日推荐商品 -->
         <div class="body-home-content-dailyGoods-goods">
-          <DailyGoods
-            :goodsImg="require('@/images/test/img3.jpeg')"
-            :goodsName="'999感冒灵'"
-            :goodsEffect="'风寒感冒'"
-            :goodsPrice="20"
-          />
+          <DailyGoods v-for="item in dayStock" :id="item.drugid" />
         </div>
       </div>
       <!-- 家中常备 -->
@@ -49,12 +45,42 @@
 import Slideshow from '@/components/body/home/Slideshow/Slideshow.vue'
 import DailyGoods from '@/components/body/home/Goods/Dailygoods.vue'
 import Homestock from '@/components/body/home/Goods/Homestock.vue'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
+  created() {
+    this.getData()
+    this.dayStockData()
+  },
   components: {
     Slideshow,
     DailyGoods,
-    Homestock,
+    Homestock
+  },
+  methods: {
+    ...mapMutations(['updateDrug']),
+    async getData() {
+      // 如果session里面有数据，则结束该函数
+      if (this.drugData) return
+      const { data: res } = await this.$http.get('/drug/list')
+      console.log(res)
+      if (res.code === '200') {
+        this.updateDrug(res.data)
+      }
+    },
+    dayStockData() {
+      this.dayStock = this.drug.filter((item) => item.keshi === '乙肝').filter((item) => item.price > 68)
+      console.log(this.dayStock)
+    }
+  },
+  computed: {
+    ...mapState(['drugData', 'drug'])
+  },
+  data() {
+    return {
+      dayStock: [],
+      path: 1
+    }
   }
 }
 </script>
@@ -68,6 +94,11 @@ export default {
       color: darkgreen;
       font-size: 22px;
     }
+  }
+  .body-home-content-dailyGoods-goods {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 </style>
