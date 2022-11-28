@@ -54,8 +54,8 @@ export default {
         return this.open('登陆失败', '请输入用户名和密码', '确定')
       // 把输入内容封装成一个对象
       const userInfo = {
-        username: this.formLabelAlign.userName,
-        password: this.formLabelAlign.userPassword
+        name: this.formLabelAlign.userName,
+        pwd: this.formLabelAlign.userPassword
       }
       // 加载器
       this.loading = true
@@ -73,22 +73,22 @@ export default {
           // 解除加载中
           this.loading = false
           // 登录成功
-          if (res.code === '200') {
-            this.open('登录成功！', `${res.data.username}欢迎您`, '确定')
+          if (res.success) {
+            this.open('登录成功！', `${res.data.name}欢迎您`, '确定')
             this.login({
-              name: res.data.username,
-              pwd: this.formLabelAlign.userPassword
+              name: res.data.name,
+              pwd: res.data.pwd
             })
             this.$router.push('/Home')
-          } else if (res.code === '-1') {
-            this.open('登陆失败', '服务器发生问题了', '取消')
-          } else this.open('登陆失败', '用户名或密码有误', '确定')
+          } else if (!res.success) {
+            this.open('登陆失败', '用户名或密码错误', '取消')
+          } else this.open('登陆失败', '服务器发生问题了', '确定')
           // 登录失败
         })
         .catch((err) => {
           this.loading = false
           console.log(err)
-          this.open('错误', err.msg, '取消')
+          this.open(err.name, err.message, '取消')
         })
     }
   },

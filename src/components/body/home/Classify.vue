@@ -1,6 +1,6 @@
 <template>
   <div class="fever">
-    <ClassifyGoods v-for="item in drugInfo" :id="item.drugid" :key="item.drugid"></ClassifyGoods>
+    <ClassifyGoods v-for="item in drugInfo" :id="item.id" :key="item.id"></ClassifyGoods>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import { mapState } from 'vuex'
 
 export default {
   created() {
-    this.judgeKeshi()
+    this.judgeDepartment()
     this.getFeverDrug()
   },
   components: {
@@ -19,28 +19,28 @@ export default {
   data() {
     return {
       drugInfo: [],
-      keshi: ''
+      department: ''
     }
   },
   methods: {
     getFeverDrug() {
-      this.drugInfo = this.drug.filter((item) => item.keshi === this.keshi)
+      this.drugInfo = this.drug.filter((item) => item.department === this.department)
 
       // console.log(this.drugInfo)
     },
-    judgeKeshi() {
+    judgeDepartment() {
       switch (this.$route.params.name) {
         case 'fever':
-          this.keshi = '发热科'
+          this.department = '发热科'
           break
         case 'digestion':
-          this.keshi = '消化内科'
+          this.department = '消化内科'
           break
         case 'OGDepartment':
-          this.keshi = '妇产科'
+          this.department = '妇产科'
           break
         case 'andrology':
-          this.keshi = '乙肝'
+          this.department = '乙肝'
           break
       }
     }

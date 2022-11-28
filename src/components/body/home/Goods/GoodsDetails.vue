@@ -5,12 +5,12 @@
     <!--{{ $route.params.id }}-->
     <div class="goodsDetails-header">
       <div class="left">
-        <img :src="require('../../home' + drugInfo.tupian)" alt="" />
+        <img :src="require('../../home' + drugInfo.photo)" alt="" />
         <span class="imgtip">温馨提醒：商品包装因厂家更换频繁，如有不符请以实物为准。</span>
       </div>
 
       <div class="right">
-        <h1 class="title">{{ drugInfo.drugname }}</h1>
+        <h1 class="title">{{ drugInfo.name }}</h1>
         <hr style="border: 1px #e5e5e5 dashed" />
         <div class="info">
           <table>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
               <td>通用名称</td>
-              <td class="td2">{{ drugInfo.drugname }}</td>
+              <td class="td2">{{ drugInfo.name }}</td>
             </tr>
             <tr>
               <td>包装规格</td>
@@ -37,7 +37,7 @@
             <tr>
               <td>适<em class="em2"></em>应<em class="em2"></em>症</td>
               <td class="td2">
-                {{ drugInfo.zuoyong }}
+                {{ drugInfo.function }}
               </td>
             </tr>
             <tr>
@@ -69,7 +69,7 @@
           <tr>
             <td class="td1">药品名称：</td>
             <td class="td2">
-              {{ drugInfo.drugname }}
+              {{ drugInfo.name }}
             </td>
           </tr>
           <tr>
@@ -86,7 +86,7 @@
           </tr>
           <tr>
             <td class="td1">功能主治：</td>
-            <td class="td2">{{ drugInfo.zuoyong }}</td>
+            <td class="td2">{{ drugInfo.function }}</td>
           </tr>
           <tr>
             <td class="td1">禁忌：</td>
@@ -144,8 +144,8 @@ export default {
   },
   methods: {
     getInfo() {
-      this.drugInfo = this.drug.filter((item) => item.drugid == this.drugID)[0]
-      this.bookInfo = this.book.filter((item) => item.drugid == this.drugID)[0]
+      this.drugInfo = this.drug.filter((item) => item.id == this.drugID)[0]
+      this.bookInfo = this.book.filter((item) => item.id == this.drugID)[0]
       console.log(this.drugInfo)
       console.log(this.bookInfo)
     },

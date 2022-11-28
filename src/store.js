@@ -24,6 +24,8 @@ export default new Vuex.Store({
       state.user.isLogin = true
     },
     logout(state) {
+      state.user.userName = ''
+      state.user.userPwd = ''
       state.user.isLogin = false
     },
     changeSkin(state, str) {

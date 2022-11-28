@@ -2,12 +2,12 @@
   <div class="classifyGoods" @click="toDetail">
     <!-- 图片 -->
     <div class="classifyGoods-img">
-      <img :src="require('../../home' + drugInfo.tupian)" alt="" />
+      <img :src="require('../../home' + drugInfo.photo)" alt="" />
     </div>
     <!-- 内容 -->
     <div class="classifyGoods-content">
-      <span class="classifyGoods-content-name">药品名称：{{ drugInfo.drugname }}</span>
-      <span class="classifyGoods-content-effect">功能主治:{{ drugInfo.zuoyong }}</span>
+      <span class="classifyGoods-content-name">药品名称：{{ drugInfo.name }}</span>
+      <span class="classifyGoods-content-effect">功能主治:{{ drugInfo.function }}</span>
       <span>剂量：{{ drugInfo.guige }}</span>
       <span>单价：￥{{ drugInfo.price }}</span>
     </div>
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     getDrugInfo() {
-      this.drugInfo = this.drug.filter((item) => item.drugid === this.id)[0]
+      this.drugInfo = this.drug.filter((item) => item.id === this.id)[0]
     },
     toDetail() {
       this.$router.push(`/goodsDetails/${this.id}`)

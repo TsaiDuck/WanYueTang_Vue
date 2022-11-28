@@ -1,14 +1,17 @@
 <template>
-  <div class="homeStock">
+  <div class="niceStock">
     <!-- 图片 -->
-    <div class="homeStock-img" @click="toDetail()">
+    <div class="niceStock-img" @click="toDetail()">
       <img :src="require('../../home' + drugInfo.photo)" alt="" />
     </div>
     <!-- 文字 -->
-    <div class="homeStock-text" @click="toDetail()">
-      <span class="homeStock-text-goodsName" :title="drugInfo.name">{{ drugInfo.name }}</span>
-      <!-- 药品作用太长了，不要了 -->
-      <span class="homeStock-text-goodsEffect" :title="drugInfo.name">{{ drugInfo.function }}</span>
+    <div class="niceStock-text" @click="toDetail()">
+      <span class="niceStock-text-goodsName" :title="drugInfo.name">{{ drugInfo.name }}</span>
+      <span class="niceStock-text-goodsEffect" :title="drugInfo.name">{{ drugInfo.function }}</span>
+      <div class="niceStock-text-Price">
+        <span class="niceStock-text-goodsNewPrice">￥{{ (drugInfo.price * 0.9).toFixed(1) }}</span>
+        <span class="niceStock-text-goodsOldPrice">￥{{ drugInfo.price }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -45,16 +48,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.homeStock {
+.niceStock {
   width: 200px;
-  height: 300px;
+  height: 350px;
   // background: skyblue;
   margin: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  .homeStock-img {
+  .niceStock-img {
     margin: 5px;
     img {
       width: 190px;
@@ -62,38 +65,41 @@ export default {
       cursor: pointer;
     }
   }
-  .homeStock-text {
+  .niceStock-text {
     cursor: pointer;
     width: 150px;
-    height: 90px;
+    height: 150px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     span {
       display: block;
       width: 150px;
       text-align: center;
     }
-    .homeStock-text-goodsName:hover {
+    .niceStock-text-goodsName:hover {
       color: darkgreen;
       text-decoration: underline;
     }
-    .homeStock-text-goodsEffect {
+    .niceStock-text-goodsEffect {
       font-size: 14px;
       margin-top: 2px;
       color: gray;
+      height: 60px;
+      overflow: hidden;
     }
   }
-  .homeStock-text-Price {
+  .niceStock-text-Price {
     width: 150px;
     display: flex;
     justify-content: space-between;
     margin: 8px 0px;
-    .homeStock-text-goodsNewPrice {
+    .niceStock-text-goodsNewPrice {
       color: red;
       font-size: 18px;
     }
-    .homeStock-text-goodsOldPrice {
+    .niceStock-text-goodsOldPrice {
       font-size: 13px;
       text-decoration: line-through;
       line-height: 28px;

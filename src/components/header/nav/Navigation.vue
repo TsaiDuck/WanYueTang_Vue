@@ -47,6 +47,7 @@
 <script>
 import LogoYellowMoon from '@/components/header/logo/logo.vue'
 import { mapState, mapMutations } from 'vuex'
+
 export default {
   name: 'Navigation',
   components: {
@@ -199,6 +200,7 @@ export default {
     position: absolute;
     top: 10px;
     right: 15px;
+    cursor: pointer;
   }
 }
 </style>
