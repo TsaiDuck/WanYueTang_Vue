@@ -24,20 +24,20 @@
             </tr>
             <tr>
               <td>包装规格</td>
-              <td class="td2">{{ drugInfo.guige }}</td>
+              <td class="td2">{{ drugInfo.specification }}</td>
             </tr>
             <tr>
               <td>剂<em></em>型</td>
-              <td class="td2">{{ drugInfo.jixing }}</td>
+              <td class="td2">{{ drugInfo.formulations }}</td>
             </tr>
             <tr>
               <td>有<em class="em2"></em>效<em class="em2"></em>期</td>
-              <td class="td2">{{ drugInfo.baozhi }}</td>
+              <td class="td2">{{ drugInfo.shelflife }}</td>
             </tr>
             <tr>
               <td>适<em class="em2"></em>应<em class="em2"></em>症</td>
               <td class="td2">
-                {{ drugInfo.function }}
+                {{ drugInfo.details }}
               </td>
             </tr>
             <tr>
@@ -74,27 +74,27 @@
           </tr>
           <tr>
             <td class="td1">剂型：</td>
-            <td class="td2">{{ drugInfo.jixing }}</td>
+            <td class="td2">{{ drugInfo.formulations }}</td>
           </tr>
           <tr>
             <td class="td1">规格：</td>
-            <td class="td2">{{ drugInfo.guige }}</td>
+            <td class="td2">{{ drugInfo.specification }}</td>
           </tr>
           <tr>
             <td class="td1">用法用量：</td>
-            <td class="td2">{{ bookInfo.useage }}</td>
+            <td class="td2">{{ bookInfo.dosage }}</td>
           </tr>
           <tr>
             <td class="td1">功能主治：</td>
             <td class="td2">{{ drugInfo.function }}</td>
           </tr>
           <tr>
-            <td class="td1">禁忌：</td>
-            <td class="td2">{{ drugInfo.shuoming }}</td>
+            <td class="td1">不良效果：</td>
+            <td class="td2">{{ drugInfo.instructionbookid }}</td>
           </tr>
           <tr>
             <td class="td1">有效期：</td>
-            <td class="td2">{{ drugInfo.baozhi }}</td>
+            <td class="td2">{{ drugInfo.shelflife }}</td>
           </tr>
         </table>
       </div>
@@ -145,7 +145,7 @@ export default {
   methods: {
     getInfo() {
       this.drugInfo = this.drug.filter((item) => item.id == this.drugID)[0]
-      this.bookInfo = this.book.filter((item) => item.id == this.drugID)[0]
+      this.bookInfo = this.book.filter((item) => item.drugId == this.drugID)[0]
       console.log(this.drugInfo)
       console.log(this.bookInfo)
     },
