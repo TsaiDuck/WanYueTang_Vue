@@ -8,10 +8,10 @@
     <div class="nav-body">
       <ul class="nav-body-ul" ref="nav_body">
         <li><a :class="{ active: hashPath === '/home' }" href="#/home">首页</a></li>
-        <li><a :class="{ active: hashPath === '/fever' }" href="#/fever">发热科</a></li>
-        <li><a :class="{ active: hashPath === '/digestion' }" href="#/digestion">消化内科</a></li>
-        <li><a :class="{ active: hashPath === '/OGDepartment' }" href="#/OGDepartment">妇产科</a></li>
-        <li><a :class="{ active: hashPath === '/andrology' }" href="#/andrology">乙肝</a></li>
+        <li><a :class="{ active: hashPath === '/classify/fever' }" href="#/classify/fever">发热科</a></li>
+        <li><a :class="{ active: hashPath === '/classify/digestion' }" href="#/classify/digestion">消化内科</a></li>
+        <li><a :class="{ active: hashPath === '/classify/OGDepartment' }" href="#/classify/OGDepartment">妇产科</a></li>
+        <li><a :class="{ active: hashPath === '/classify/andrology' }" href="#/classify/andrology">乙肝</a></li>
       </ul>
     </div>
     <!-- 搜索框 -->

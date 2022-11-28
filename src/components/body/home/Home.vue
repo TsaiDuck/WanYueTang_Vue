@@ -49,7 +49,8 @@ import { mapState, mapMutations } from 'vuex'
 
 export default {
   mounted() {
-    this.getData()
+    this.getDrugData()
+    this.getBookData()
     this.dayStockData()
   },
   components: {
@@ -58,9 +59,9 @@ export default {
     Homestock
   },
   methods: {
-    ...mapMutations(['updateDrug']),
+    ...mapMutations(['updateDrug', 'updateBook']),
     // 获取所有信息
-    getData() {
+    getDrugData() {
       // 如果session里面有数据，则结束该函数
       if (this.drugState) return (this.pageLoading = false)
       // 发送ajax
@@ -90,6 +91,21 @@ export default {
           }
         })
     },
+    getBookData() {
+      if (this.bookState) return (this.pageLoading = false)
+      this.$http({
+        method: 'GET',
+        url: '/book/list'
+      })
+        .then(({ data: res }) => {
+          if (res.code === '200') {
+            this.updateBook(res.data)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     // 筛选 每日推荐 信息，并返回药品 id 给 每日推荐组件，在上边 v-for 中传值
     dayStockData() {
       this.dayStock = this.drug.filter((item) => item.keshi === '乙肝').filter((item) => item.price > 68)
@@ -98,7 +114,7 @@ export default {
   computed: {
     // drugState 是判断是否已经获取到了药品信息
     // drug 是药品信息数组
-    ...mapState(['drugState', 'drug'])
+    ...mapState(['drugState', 'drug', 'bookState', 'book'])
   },
   data() {
     return {

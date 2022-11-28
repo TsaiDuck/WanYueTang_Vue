@@ -1,21 +1,46 @@
 <template>
-  <div class="classifyGoods">
+  <div class="classifyGoods" @click="toDetail">
     <!-- 图片 -->
     <div class="classifyGoods-img">
-      <img src="" alt="" />
+      <img :src="require('../../home' + drugInfo.tupian)" alt="" />
     </div>
     <!-- 内容 -->
     <div class="classifyGoods-content">
-      <span class="classifyGoods-content-name">健胃消食片</span>
-      <span>功能主治</span>
-      <span>剂量</span>
-      <span>单价</span>
+      <span class="classifyGoods-content-name">药品名称：{{ drugInfo.drugname }}</span>
+      <span class="classifyGoods-content-effect">功能主治:{{ drugInfo.zuoyong }}</span>
+      <span>剂量：{{ drugInfo.guige }}</span>
+      <span>单价：￥{{ drugInfo.price }}</span>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import { mapState } from 'vuex'
+
+export default {
+  props: {
+    id: { type: Number }
+  },
+  computed: {
+    ...mapState(['drug'])
+  },
+  data() {
+    return {
+      drugInfo: {}
+    }
+  },
+  methods: {
+    getDrugInfo() {
+      this.drugInfo = this.drug.filter((item) => item.drugid === this.id)[0]
+    },
+    toDetail() {
+      this.$router.push(`/goodsDetails/${this.id}`)
+    }
+  },
+  created() {
+    this.getDrugInfo()
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -30,7 +55,10 @@ export default {}
   width: 500px;
   height: 200px;
   margin: 10px;
-  background-color: lightyellow;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
   .flex(space-between,center);
   .classifyGoods-img {
     img {
@@ -41,7 +69,11 @@ export default {}
   .classifyGoods-content {
     width: 280px;
     height: 180px;
-    .flex(space-between,flex-start,wrap,column);
+    .flex(space-around,flex-start,wrap,column);
+    .classifyGoods-content-effect {
+      height: 40px;
+      overflow: hidden;
+    }
   }
 }
 </style>

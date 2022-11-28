@@ -13,7 +13,9 @@ export default new Vuex.Store({
       userPwd: ''
     },
     drug: [],
-    drugState: false
+    drugState: false,
+    book: [],
+    bookState: false
   },
   mutations: {
     login(state, payload) {
@@ -36,6 +38,10 @@ export default new Vuex.Store({
     updateDrug(state, drug) {
       state.drug = drug
       state.drugState = true
+    },
+    updateBook(state, book) {
+      state.book = book
+      state.bookState = true
     }
   },
   actions: {},

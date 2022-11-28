@@ -7,7 +7,7 @@ import GoodsDetails from '@/components/body/home/Goods/GoodsDetails'
 import userHome from '@/components/body/users/userHome'
 import userCart from '@/components/body/users/userCart'
 import userInfo from '@/components/body/users/userInfo'
-import Fever from '@/components/body/home/Fever'
+import Classify from '@/components/body/home/Classify'
 
 Vue.use(VueRouter)
 
@@ -34,7 +34,7 @@ const routes = [
     ]
   },
   { path: '/userCart', name: 'userCart', component: userCart },
-  { path: '/fever', name: 'fever', component: Fever }
+  { path: '/classify/:name', name: 'Classify', component: Classify }
 ]
 
 const router = new VueRouter({
