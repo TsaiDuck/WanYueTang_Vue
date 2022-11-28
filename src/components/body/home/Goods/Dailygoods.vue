@@ -2,11 +2,12 @@
   <div class="dailyGoods">
     <!-- 图片 -->
     <div class="dailyGoods-img">
-      <img :src="require('.' + drugInfo.tupian)" alt="" />
+      <img :src="require('../../home' + drugInfo.tupian)" alt="" />
     </div>
     <!-- 文字 -->
     <div class="dailyGoods-text">
       <span class="dailyGoods-text-goodsName" :title="drugInfo.drugname">{{ drugInfo.drugname }}</span>
+      <!-- 药品作用太长了，不要了 -->
       <!-- <span class="dailyGoods-text-goodsEffect" :title="goodsName">{{ goodsEffect }}</span> -->
       <div class="dailyGoods-text-Price">
         <span class="dailyGoods-text-goodsNewPrice">￥{{ (drugInfo.price * 0.8).toFixed(1) }}</span>
@@ -21,12 +22,11 @@ import { mapState } from 'vuex'
 export default {
   props: {
     id: {
-      require: true,
       type: Number
     }
   },
   computed: {
-    ...mapState(['drug'])
+    ...mapState(['drug', 'drugState'])
   },
   data() {
     return {
@@ -34,6 +34,7 @@ export default {
     }
   },
   methods: {
+    // 根据传进来的 id 找到药品对象，再把对象的各个属性值渲染到页面
     getDrugInfo() {
       this.drugInfo = this.drug.filter((item) => item.drugid === this.id)[0]
     }

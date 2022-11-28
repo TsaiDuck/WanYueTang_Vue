@@ -1,5 +1,5 @@
 <template>
-  <div class="body-home">
+  <div class="body-home" v-loading.fullscreen.lock="pageLoading">
     <!-- 轮播图 -->
     <div class="body-home-slideshow">
       <Slideshow></Slideshow>
@@ -16,7 +16,7 @@
         </div>
         <!-- 每日推荐商品 -->
         <div class="body-home-content-dailyGoods-goods">
-          <DailyGoods v-for="item in dayStock" :id="item.drugid" />
+          <DailyGoods v-for="item in dayStock" :id="item.drugid" :key="item.drugid" />
         </div>
       </div>
       <!-- 家中常备 -->
@@ -48,7 +48,7 @@ import Homestock from '@/components/body/home/Goods/Homestock.vue'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
-  created() {
+  mounted() {
     this.getData()
     this.dayStockData()
   },
@@ -59,27 +59,53 @@ export default {
   },
   methods: {
     ...mapMutations(['updateDrug']),
-    async getData() {
+    // 获取所有信息
+    getData() {
       // 如果session里面有数据，则结束该函数
-      if (this.drugData) return
-      const { data: res } = await this.$http.get('/drug/list')
-      console.log(res)
-      if (res.code === '200') {
-        this.updateDrug(res.data)
-      }
+      if (this.drugState) return (this.pageLoading = false)
+      // 发送ajax
+      this.$http({
+        method: 'GET',
+        url: '/drug/list'
+      })
+        .then(({ data: res }) => {
+          if (res.code === '200') {
+            this.updateDrug(res.data)
+            location.reload()
+            this.pageLoading = false
+          } else if (res.code === '-1') {
+            this.$alert('请刷新页面重试', '服务器发生错误', {
+              confirmButtonText: '确定'
+            })
+            this.pageLoading = false
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          if (err.code === 'ECONNABORTED') {
+            this.$alert('请刷新页面重试', '服务器请求超时', {
+              confirmButtonText: '确定'
+            })
+            this.pageLoading = false
+          }
+        })
     },
+    // 筛选 每日推荐 信息，并返回药品 id 给 每日推荐组件，在上边 v-for 中传值
     dayStockData() {
       this.dayStock = this.drug.filter((item) => item.keshi === '乙肝').filter((item) => item.price > 68)
-      console.log(this.dayStock)
     }
   },
   computed: {
-    ...mapState(['drugData', 'drug'])
+    // drugState 是判断是否已经获取到了药品信息
+    // drug 是药品信息数组
+    ...mapState(['drugState', 'drug'])
   },
   data() {
     return {
+      // 每日推荐的药品数组
       dayStock: [],
-      path: 1
+      // 页面加载状态，在ajax请求结束后会结束加载
+      pageLoading: true
     }
   }
 }
