@@ -18,14 +18,19 @@
     </div>
     <!-- 购物车内容 -->
     <div class="userCart-content">
-      <Cartgoods
-        v-for="item in cartList"
-        :key="item.index"
-        :id="item.drugId"
-        :count="item.count"
-        :isChecked="item.state"
-        @state-change="getNewState"
-      ></Cartgoods>
+      <div class="userCart-content-show" v-if="cartState">
+        <Cartgoods
+          v-for="item in cartList"
+          :key="item.index"
+          :id="item.drugId"
+          :count="item.count"
+          :isChecked="item.state"
+          @state-change="getNewState"
+        ></Cartgoods>
+      </div>
+      <div class="userCart-content-none" v-else>
+        <el-empty description="购物车内空空如也，去加点东西进来吧~"></el-empty>
+      </div>
     </div>
     <!-- 结算 -->
     <div class="userCart-aggregate">
@@ -129,8 +134,8 @@ export default {
     margin: 25px auto;
     padding: 20px 0px;
     font-size: 35px;
-    color: white;
-    background-color: darkgreen;
+    color: darkgreen;
+    // background-color: darkgreen;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -157,6 +162,12 @@ export default {
     }
     .userCart-nav-subtotal {
       width: 50px;
+    }
+  }
+  .userCart-content {
+    .userCart-content-none {
+      height: 400px;
+      margin: 30px auto;
     }
   }
   .userCart-aggregate {

@@ -8,7 +8,7 @@
     <div class="classifyGoods-content">
       <span class="classifyGoods-content-name">药品名称：{{ drugInfo.name }}</span>
       <span class="classifyGoods-content-effect">功能主治:{{ drugInfo.function }}</span>
-      <span>剂量：{{ drugInfo.guige }}</span>
+      <span>剂量：{{ drugInfo.specification }}</span>
       <span>单价：￥{{ drugInfo.price }}</span>
     </div>
   </div>
