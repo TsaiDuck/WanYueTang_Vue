@@ -8,6 +8,7 @@ import userHome from '@/components/body/users/userHome'
 import userCart from '@/components/body/users/userCart'
 import userInfo from '@/components/body/users/userInfo'
 import Classify from '@/components/body/home/Classify'
+import Search from "@/components/body/home/Search";
 
 Vue.use(VueRouter)
 
@@ -34,7 +35,8 @@ const routes = [
     ]
   },
   { path: '/userCart', name: 'userCart', component: userCart },
-  { path: '/classify/:name', name: 'Classify', component: Classify }
+  { path: '/classify/:name', name: 'Classify', component: Classify },
+  { path: '/search/:searchValue', name: 'Search', component: Search},
 ]
 
 const router = new VueRouter({

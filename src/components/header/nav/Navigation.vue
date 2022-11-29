@@ -16,8 +16,8 @@
     </div>
     <!-- 搜索框 -->
     <div class="nav-select">
-      <input class="nav-select-search" type="text" name="" id="" />
-      <b class="el-icon-search nav-select-icon"></b>
+      <input class="nav-select-search" type="text" name="" id="" v-model="searchValue" @keyup.enter="getSearch"/>
+      <b class="el-icon-search nav-select-icon" @click="getSearch"></b>
     </div>
     <!-- 登陆注册内容 -->
     <div class="nav-user">
@@ -56,7 +56,9 @@ export default {
   data() {
     return {
       hashPath: this.$route.path,
-      showFlag: false
+      showFlag: false,
+      searchValue:'',
+      search: []
     }
   },
   // 监听,当路由发生变化的时候执行
@@ -68,10 +70,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user','drug'])
   },
   methods: {
-    ...mapMutations(['logout']),
+    ...mapMutations(['logout','updateDrug']),
     showUserInfo() {
       this.showFlag = true
     },
@@ -84,7 +86,9 @@ export default {
     userLogout() {
       this.showFlag = false
       this.logout()
-      this.$router.push('/home')
+    },
+    getSearch() {
+      this.linkTo('/search/'+ this.searchValue)
     }
   }
 }
