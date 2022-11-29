@@ -46,7 +46,7 @@
                 <el-button @click="sub" style="width: 30px; height: 30px; font-size: 16px; line-height: 30px">
                   <i class="el-icon-minus"></i>
                 </el-button>
-                <input type="text" v-model="count" @blur="judge" @keyup="UpNumber" @keydown="UpNumber" />
+                <span style="padding: 0px 10px">{{ count }}</span>
                 <el-button @click="add" style="width: 30px; height: 30px; font-size: 16px; line-height: 30px">
                   <i class="el-icon-plus"></i>
                 </el-button>
@@ -56,7 +56,14 @@
         </div>
         <div class="button">
           <el-button type="danger" class="el-button2">购买</el-button>
-          <el-button type="primary" class="el-button2">加入购物车</el-button>
+          <el-button
+            type="primary"
+            class="el-button2"
+            @click="addCart"
+            v-loading="loading"
+            element-loading-text="正在添加"
+            >加入购物车</el-button
+          >
         </div>
       </div>
     </div>
@@ -110,44 +117,19 @@ export default {
     this.getInfo()
     document.body.scrollIntoView()
   },
-  props: {
-    goodsName: {
-      default: '',
-      type: String
-    },
-    goodsEffect: {
-      default: '',
-      type: String
-    },
-    goodsPrice: {
-      default: 0,
-      type: Number
-    },
-    goodsImg: {
-      default: '',
-      type: String
-    },
-    goodsNum: {
-      default: 10,
-      type: Number
-    }
-  },
   data() {
     return {
       count: 1,
-      goodNum: this.goodsNum,
-      tableData: [{ adress: '1234' }],
       drugID: this.$route.params.id,
       drugInfo: {},
-      bookInfo: {}
+      bookInfo: {},
+      loading: false
     }
   },
   methods: {
     getInfo() {
       this.drugInfo = this.drug.filter((item) => item.id == this.drugID)[0]
       this.bookInfo = this.book.filter((item) => item.drugId == this.drugID)[0]
-      console.log(this.drugInfo)
-      console.log(this.bookInfo)
     },
     judge() {
       if (this.count == '' || this.count <= 0) this.count = 1
@@ -158,18 +140,84 @@ export default {
       e.target.value = e.target.value.replace(/[^\d]/g, '')
     },
     add() {
-      if (this.count < this.goodNum) {
-        this.count += 1
-      }
+      this.count += 1
     },
     sub() {
       if (this.count > 1) {
         this.count -= 1
       }
+    },
+    addCart() {
+      // 封装 JSON
+      const cartInfo = {
+        userId: this.user.userId,
+        drugId: this.drugID,
+        count: this.count
+      }
+      // 加载器
+      this.loading = true
+      // 筛选出购物车里已有的药品
+      const cartDrug = []
+      if (this.cartState) {
+        this.cart.forEach((item) => {
+          if (!cartDrug.includes(item.drugId)) {
+            cartDrug.push(item.drugId)
+          }
+        })
+      }
+      // ajax
+      this.$http({
+        method: 'post',
+        url: cartDrug.includes(this.drugInfo.id) ? '/cart/amount' : '/cart/addcart',
+        data: JSON.stringify(cartInfo),
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        }
+      })
+        .then(({ data: res }) => {
+          // 解除加载器
+          this.loading = false
+          if (res.success) {
+            this.$alert('', res.data, {
+              confirmButtonText: '确定'
+            })
+            this.getCart()
+          }
+        })
+        .catch((err) => {
+          // 解除加载器
+          this.loading = false
+          if (err.code === 'ECONNABORTED') {
+            this.$alert('请重新添加', '服务器请求超时', {
+              confirmButtonText: '确定'
+            })
+          } else {
+            this.$alert(err.message, err.name, {
+              confirmButtonText: '取消'
+            })
+          }
+        })
+    },
+    getCart() {
+      this.$http({
+        method: 'GET',
+        url: `/cart/list?userid=${this.user.userId}`
+      })
+        .then(({ data: res }) => {
+          if (res.success) {
+            this.$store.commit('updateCart', res.data)
+          } else {
+          }
+        })
+        .catch((err) => {
+          this.$alert(err.message, err.name, {
+            confirmButtonText: '取消'
+          })
+        })
     }
   },
   computed: {
-    ...mapState(['drug', 'book'])
+    ...mapState(['drug', 'book', 'user', 'cartState', 'cart'])
   }
 }
 </script>

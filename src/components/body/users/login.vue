@@ -6,13 +6,13 @@
       <span>网上药店登录系统</span>
     </div>
     <!-- 登录页面主体 -->
-    <div class="body-login-main">
+    <div class="body-login-main" v-loading="loading">
       <!-- 背景图片 -->
       <div class="body-login-main-img">
         <img src="../../../images/test/img3.jpeg" alt="" />
       </div>
       <!-- form 表单 -->
-      <div class="body-login-main-form" v-loading="loading">
+      <div class="body-login-main-form">
         <el-form label-position="left" label-width="80px" :model="formLabelAlign">
           <el-form-item label="用户名">
             <el-input v-model="formLabelAlign.userName"></el-input>
@@ -69,16 +69,18 @@ export default {
         }
       })
         .then(({ data: res }) => {
-          console.log(res)
           // 解除加载中
           this.loading = false
           // 登录成功
           if (res.success) {
             this.open('登录成功！', `${res.data.name}欢迎您`, '确定')
+            console.log(res)
             this.login({
               name: res.data.name,
-              pwd: res.data.pwd
+              pwd: res.data.pwd,
+              id: res.data.id
             })
+            this.getCart()
             this.$router.push('/Home')
           } else if (!res.success) {
             this.open('登陆失败', '用户名或密码错误', '取消')
@@ -87,8 +89,24 @@ export default {
         })
         .catch((err) => {
           this.loading = false
-          console.log(err)
           this.open(err.name, err.message, '取消')
+        })
+    },
+    getCart() {
+      this.$http({
+        method: 'GET',
+        url: `/cart/list?userid=${this.user.userId}`
+      })
+        .then(({ data: res }) => {
+          if (res.success) {
+            this.$store.commit('updateCart', res.data)
+          } else {
+          }
+        })
+        .catch((err) => {
+          this.$alert(err.message, err.name, {
+            confirmButtonText: '取消'
+          })
         })
     }
   },

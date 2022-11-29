@@ -9,7 +9,7 @@ import ClassifyGoods from '@/components/body/home/Goods/classifyGoods.vue'
 import { mapState } from 'vuex'
 
 export default {
-  created() {
+  mounted() {
     this.judgeDepartment()
     this.getFeverDrug()
   },
@@ -25,8 +25,6 @@ export default {
   methods: {
     getFeverDrug() {
       this.drugInfo = this.drug.filter((item) => item.department === this.department)
-
-      // console.log(this.drugInfo)
     },
     judgeDepartment() {
       switch (this.$route.params.name) {
@@ -51,7 +49,8 @@ export default {
   watch: {
     $route: {
       handler: function () {
-        location.reload()
+        this.judgeDepartment()
+        this.getFeverDrug()
       }
     }
   }

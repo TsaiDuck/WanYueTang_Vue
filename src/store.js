@@ -9,23 +9,28 @@ export default new Vuex.Store({
     // 当前登录用户
     user: {
       isLogin: false,
+      userId: -1,
       userName: '',
       userPwd: ''
     },
     drug: [],
     drugState: false,
     book: [],
-    bookState: false
+    bookState: false,
+    cart: [],
+    cartState: false
   },
   mutations: {
     login(state, payload) {
       state.user.userName = payload.name
       state.user.userPwd = payload.pwd
+      state.user.userId = payload.id
       state.user.isLogin = true
     },
     logout(state) {
       state.user.userName = ''
       state.user.userPwd = ''
+      state.user.userId = -1
       state.user.isLogin = false
     },
     changeSkin(state, str) {
@@ -44,6 +49,10 @@ export default new Vuex.Store({
     updateBook(state, book) {
       state.book = book
       state.bookState = true
+    },
+    updateCart(state, cart) {
+      state.cart = cart
+      state.cartState = true
     }
   },
   actions: {},

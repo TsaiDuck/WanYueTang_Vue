@@ -18,13 +18,7 @@
     </div>
     <!-- 购物车内容 -->
     <div class="userCart-content">
-      <Cartgoods
-        :isChecked="true"
-        :imgPath="require('@/images/test/img4.jpg')"
-        :goodInfo="'健胃消食片'"
-        :price="10"
-        :count="2"
-      ></Cartgoods>
+      <Cartgoods v-for="item in cart" :key="item.index" :id="item.drugId"></Cartgoods>
     </div>
     <!-- 结算 -->
     <div class="userCart-aggregate">
@@ -44,9 +38,14 @@
 
 <script>
 import Cartgoods from '@/components/body/home/Goods/Cartgoods.vue'
+import { mapState } from 'vuex'
+
 export default {
   components: {
     Cartgoods
+  },
+  computed: {
+    ...mapState(['cart', 'cartState'])
   }
 }
 </script>

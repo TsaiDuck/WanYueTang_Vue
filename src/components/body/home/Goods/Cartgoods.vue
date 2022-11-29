@@ -1,49 +1,92 @@
 <template>
   <div class="cartGoods">
-    <input type="checkbox" name="" id="a" :isChecked="isChecked" />
+    <input type="checkbox" name="" :id="id" :isChecked="isChecked" />
     <div class="cartGoods-img">
-      <label for="a"><img :src="imgPath" alt="" /></label>
+      <label :for="id"><img :src="require('../../home' + drugInfo.photo)" alt="" /></label>
     </div>
-    <span class="cartGoods-info">{{ goodInfo }}</span>
-    <span class="cartGoods-price">￥{{ price }}</span>
+    <span class="cartGoods-info">{{ drugInfo.name }}</span>
+    <span class="cartGoods-price">￥{{ drugInfo.price }}</span>
     <div class="cartGoods-count">
       <button class="cartGoods-count-btn">-</button>
       <span class="cartGoods-count-counter">{{ count }}</span>
-      <button class="cartGoods-count-btn">+</button>
+      <button class="cartGoods-count-btn" @click="changeCount">+</button>
     </div>
-    <span class="cartGoods-subtotal">￥{{ subTotal }}</span>
+    <span class="cartGoods-subtotal">￥{{ drugInfo.price * count }}</span>
     <a href="javascript:;">移除该商品</a>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: {
-    isChecked: {
-      default: false,
-      type: Boolean
-    },
-    imgPath: {
-      default: '',
-      type: String
-    },
-    goodInfo: {
-      default: '',
-      type: String
-    },
-    price: {
-      default: 0,
-      type: Number
-    },
-    count: {
-      default: 1,
-      type: Number
-    }
+    id: { type: Number },
+    isChecked: { type: Boolean, default: false }
   },
   data() {
     return {
-      subTotal: this.price * this.count
+      count: 0,
+      drugInfo: {}
     }
+  },
+  methods: {
+    getDrugData() {
+      this.drugInfo = this.drug.filter((item) => item.id === this.id)[0]
+      this.count = this.cart.filter((item) => item.drugId === this.id)[0].count
+    },
+    changeCount() {
+      const obj = {
+        userId: this.cart.filter((item) => item.drugId === this.id)[0].userId,
+        drugId: this.id,
+        count: this.count + 1
+      }
+      this.$http({
+        method: 'POST',
+        url: '/cart/amount',
+        data: JSON.stringify(obj),
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        }
+      })
+        .then(({ data: res }) => {
+          if (res.success) {
+            console.log(res)
+            this.getCart()
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          if (err.code === 'ECONNABORTED') {
+            this.$alert('请刷新页面重试', '服务器请求超时', {
+              confirmButtonText: '确定'
+            })
+          } else console.log(err)
+        })
+    },
+    getCart() {
+      this.$http({
+        method: 'GET',
+        url: `/cart/list?userid=${this.user.userId}`
+      })
+        .then(({ data: res }) => {
+          if (res.success) {
+            this.$store.commit('updateCart', res.data)
+          } else {
+          }
+        })
+        .catch((err) => {
+          this.$alert(err.message, err.name, {
+            confirmButtonText: '取消'
+          })
+        })
+    }
+  },
+  computed: {
+    ...mapState(['drug', 'cart', 'user'])
+  },
+  created() {
+    this.getDrugData()
   }
 }
 </script>
@@ -85,7 +128,7 @@ export default {
   .cartGoods-info {
     width: 150px;
     height: 60px;
-    overflow: visible;
+    overflow: hidden;
   }
   .cartGoods-price {
     width: 50px;

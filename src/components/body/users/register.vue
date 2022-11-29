@@ -6,7 +6,7 @@
       <span>网上药店注册系统</span>
     </div>
     <!-- 注册页面主体 -->
-    <div class="body-login-main">
+    <div class="body-login-main" v-loading="loading">
       <!-- 背景图片 -->
       <div class="body-login-main-img">
         <img src="../../../images/test/img3.jpeg" alt="" />
@@ -46,6 +46,7 @@
 <script>
 export default {
   data() {
+    // 判断密码是否为空
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
@@ -56,6 +57,7 @@ export default {
         callback()
       }
     }
+    // 判断两次密码是否一致
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
@@ -65,6 +67,7 @@ export default {
         callback()
       }
     }
+    // 判断手机号是否符合格式
     var validatePhone = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入手机号'))
@@ -77,6 +80,7 @@ export default {
       }
     }
     return {
+      // form 表单内容
       ruleForm: {
         user_name: '',
         user_password: '',
@@ -84,6 +88,7 @@ export default {
         user_gender: '',
         user_phone: ''
       },
+      // 判断规则
       rules: {
         user_name: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -93,21 +98,22 @@ export default {
         checkPass: [{ validator: validatePass2, trigger: 'blur' }],
         user_gender: [{ required: true, message: '请选择性别', trigger: 'blur' }],
         user_phone: [{ validator: validatePhone, trigger: 'blur' }]
-      }
+      },
+      loading: false
     }
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
-          console.log(this.ruleForm)
           const userInfo = {
-            username: this.ruleForm.user_name,
-            password: this.ruleForm.user_password,
+            name: this.ruleForm.user_name,
+            pwd: this.ruleForm.user_password,
             phone: this.ruleForm.user_phone,
             sex: this.ruleForm.user_gender
           }
+          // 加载器
+          this.loading = true
           // ajax
           this.$http({
             method: 'POST',
@@ -116,7 +122,10 @@ export default {
             headers: { 'Content-Type': 'application/json;charset=UTF-8' }
           })
             .then(({ data: res }) => {
-              if (res.code === '200') {
+              // 解除加载中
+              this.loading = false
+              // 判断返回值
+              if (res.success) {
                 this.open('注册成功!', '现在可以登录辣', '确定')
                 this.$router.push('/login')
               } else {
@@ -124,10 +133,19 @@ export default {
               }
             })
             .catch((err) => {
-              console.log(err)
+              // 解除加载中
+              this.loading = false
+              if (err.code === 'ECONNABORTED') {
+                this.$alert('请重新注册', '服务器请求超时', {
+                  confirmButtonText: '确定'
+                })
+              } else {
+                this.$alert(err.message, err.name, {
+                  confirmButtonText: '取消'
+                })
+              }
             })
         } else {
-          console.log('error submit!!')
           return false
         }
       })
