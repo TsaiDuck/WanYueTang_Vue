@@ -41,10 +41,12 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-// const isLogin = ['/login', '/register']
-// if (isLogin.includes(to.path) && router.app.$store.state.user.isLogin) next('/userHome')
-//   if (to.path === '/login') next('/home')
-// })
+router.beforeEach((to, from, next) => {
+  const isLogin = ['/login', '/register']
+  const notLogin = ['/userCart']
+  if (isLogin.includes(to.path) && router.app.$store.state.user.isLogin) next('/userHome')
+  else if (notLogin.includes(to.path) && !router.app.$store.state.user.isLogin) next('/login')
+  else next()
+})
 
 export default router
