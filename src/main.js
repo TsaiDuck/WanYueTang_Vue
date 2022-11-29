@@ -6,7 +6,7 @@ import router from './router'
 import axios from 'axios'
 import store from './store'
 
-axios.defaults.baseURL = 'http://localhost:8080'
+axios.defaults.baseURL = 'http://1.12.227.13:8080'
 axios.defaults.timeout = 5000
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 Vue.prototype.$http = axios
