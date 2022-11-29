@@ -1,17 +1,17 @@
 <template>
   <div class="cartGoods">
-    <input type="checkbox" name="" :id="id" :isChecked="isChecked" />
+    <input type="checkbox" name="" :id="id" :checked="isChecked" @change="stateChange" />
     <div class="cartGoods-img">
       <label :for="id"><img :src="require('../../home' + drugInfo.photo)" alt="" /></label>
     </div>
     <span class="cartGoods-info">{{ drugInfo.name }}</span>
     <span class="cartGoods-price">￥{{ drugInfo.price }}</span>
     <div class="cartGoods-count">
-      <button class="cartGoods-count-btn">-</button>
+      <button class="cartGoods-count-btn" @click="changeCount('sub')">-</button>
       <span class="cartGoods-count-counter">{{ count }}</span>
-      <button class="cartGoods-count-btn" @click="changeCount">+</button>
+      <button class="cartGoods-count-btn" @click="changeCount('add')">+</button>
     </div>
-    <span class="cartGoods-subtotal">￥{{ drugInfo.price * count }}</span>
+    <span class="cartGoods-subtotal">￥{{ (drugInfo.price * count).toFixed(2) }}</span>
     <a href="javascript:;">移除该商品</a>
   </div>
 </template>
@@ -22,24 +22,24 @@ import { mapState } from 'vuex'
 export default {
   props: {
     id: { type: Number },
-    isChecked: { type: Boolean, default: false }
+    isChecked: { type: Boolean, default: false },
+    count: { type: Number }
   },
   data() {
     return {
-      count: 0,
       drugInfo: {}
     }
   },
   methods: {
     getDrugData() {
       this.drugInfo = this.drug.filter((item) => item.id === this.id)[0]
-      this.count = this.cart.filter((item) => item.drugId === this.id)[0].count
     },
-    changeCount() {
+    changeCount(fun) {
+      if (fun === 'sub' && this.count === 1) return
       const obj = {
         userId: this.cart.filter((item) => item.drugId === this.id)[0].userId,
         drugId: this.id,
-        count: this.count + 1
+        count: fun === 'add' ? this.count + 1 : this.count - 1
       }
       this.$http({
         method: 'POST',
@@ -51,12 +51,13 @@ export default {
       })
         .then(({ data: res }) => {
           if (res.success) {
-            console.log(res)
             this.getCart()
+            setTimeout(() => {
+              this.resetSetItem('watchStorage', Math.random())
+            }, 100)
           }
         })
         .catch((err) => {
-          console.log(err)
           if (err.code === 'ECONNABORTED') {
             this.$alert('请刷新页面重试', '服务器请求超时', {
               confirmButtonText: '确定'
@@ -80,6 +81,11 @@ export default {
             confirmButtonText: '取消'
           })
         })
+    },
+    stateChange(e) {
+      const newState = e.target.checked
+      // 触发自定义事件
+      this.$emit('state-change', { id: this.id, value: newState })
     }
   },
   computed: {

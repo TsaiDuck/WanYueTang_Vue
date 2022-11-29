@@ -32,6 +32,8 @@ export default new Vuex.Store({
       state.user.userPwd = ''
       state.user.userId = -1
       state.user.isLogin = false
+      state.cart = []
+      state.cartState = false
     },
     changeSkin(state, str) {
       state.skin = str

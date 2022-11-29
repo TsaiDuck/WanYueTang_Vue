@@ -84,6 +84,7 @@ export default {
     userLogout() {
       this.showFlag = false
       this.logout()
+      this.$router.push('/home')
     }
   }
 }

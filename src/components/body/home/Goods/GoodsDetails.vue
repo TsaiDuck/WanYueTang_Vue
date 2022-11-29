@@ -131,14 +131,6 @@ export default {
       this.drugInfo = this.drug.filter((item) => item.id == this.drugID)[0]
       this.bookInfo = this.book.filter((item) => item.drugId == this.drugID)[0]
     },
-    judge() {
-      if (this.count == '' || this.count <= 0) this.count = 1
-      if (this.count >= this.goodNum) this.count = this.goodNum
-    },
-    //只允许输入数字
-    UpNumber(e) {
-      e.target.value = e.target.value.replace(/[^\d]/g, '')
-    },
     add() {
       this.count += 1
     },
@@ -148,11 +140,21 @@ export default {
       }
     },
     addCart() {
+      // 判断是否已登录
+      if (!this.user.isLogin) {
+        this.$alert('请先登录后再进行该操作', '您尚未登录', {
+          confirmButtonText: '确定'
+        }).then(() => {
+          this.$router.push('/login')
+        })
+        return
+      }
       // 封装 JSON
       const cartInfo = {
         userId: this.user.userId,
         drugId: this.drugID,
-        count: this.count
+        count: this.count,
+        price: this.drugInfo.price
       }
       // 加载器
       this.loading = true

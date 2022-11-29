@@ -74,7 +74,6 @@ export default {
           // 登录成功
           if (res.success) {
             this.open('登录成功！', `${res.data.name}欢迎您`, '确定')
-            console.log(res)
             this.login({
               name: res.data.name,
               pwd: res.data.pwd,

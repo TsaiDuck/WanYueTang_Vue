@@ -92,12 +92,15 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err)
           if (err.code === 'ECONNABORTED') {
             this.$alert('请刷新页面重试', '服务器请求超时', {
               confirmButtonText: '确定'
             })
             this.pageLoading = false
+          } else {
+            this.$alert(err.message, err.name, {
+              confirmButtonText: '取消'
+            })
           }
         })
     },
@@ -110,11 +113,12 @@ export default {
         .then(({ data: res }) => {
           if (res.success) {
             this.updateBook(res.data)
-            console.log(res)
           }
         })
         .catch((err) => {
-          console.log(err)
+          this.$alert(err.message, err.name, {
+            confirmButtonText: '取消'
+          })
         })
     },
     // 筛选 每日推荐 信息，并返回药品 id 给 每日推荐组件，在上边 v-for 中传值
