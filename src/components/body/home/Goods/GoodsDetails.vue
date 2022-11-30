@@ -55,7 +55,6 @@
           </table>
         </div>
         <div class="button">
-          <el-button type="danger" class="el-button2">购买</el-button>
           <el-button
             type="primary"
             class="el-button2"
@@ -64,6 +63,7 @@
             element-loading-text="正在添加"
             >加入购物车</el-button
           >
+          <!-- <el-button type="danger" class="el-button2">购买</el-button> -->
         </div>
       </div>
     </div>
@@ -319,6 +319,7 @@ export default {
         text-align: center;
         height: 60px;
         line-height: 60px;
+        width: 380px;
         .el-button2 {
           width: 150px;
           height: 50px;

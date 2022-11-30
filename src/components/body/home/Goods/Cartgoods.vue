@@ -52,9 +52,6 @@ export default {
         .then(({ data: res }) => {
           if (res.success) {
             this.getCart()
-            setTimeout(() => {
-              this.resetSetItem('watchStorage', Math.random())
-            }, 100)
           }
         })
         .catch((err) => {

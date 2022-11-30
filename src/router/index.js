@@ -8,7 +8,8 @@ import userHome from '@/components/body/users/userHome'
 import userCart from '@/components/body/users/userCart'
 import userInfo from '@/components/body/users/userInfo'
 import Classify from '@/components/body/home/Classify'
-import Search from "@/components/body/home/Search";
+import Search from '@/components/body/home/Search'
+import NotFound from '@/components/body/home/NotFound'
 
 Vue.use(VueRouter)
 
@@ -36,7 +37,8 @@ const routes = [
   },
   { path: '/userCart', name: 'userCart', component: userCart },
   { path: '/classify/:name', name: 'Classify', component: Classify },
-  { path: '/search/:searchValue', name: 'Search', component: Search},
+  { path: '/search/:searchValue', name: 'Search', component: Search },
+  { path: '*', name: 'NotFound', component: NotFound }
 ]
 
 const router = new VueRouter({
@@ -47,7 +49,6 @@ router.beforeEach((to, from, next) => {
   const isLogin = ['/login', '/register']
   const notLogin = ['/userCart']
   if (isLogin.includes(to.path) && router.app.$store.state.user.isLogin) next('/userHome')
-  else if (notLogin.includes(to.path) && !router.app.$store.state.user.isLogin) next('/login')
   else next()
 })
 

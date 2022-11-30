@@ -86,6 +86,7 @@ export default {
     // 获取复选框选择状态
     getFullState(e) {
       this.cartList.forEach((item) => (item.state = e.target.checked))
+      this.getTotal()
     },
     // 总计
     getTotal() {
@@ -119,9 +120,13 @@ export default {
   },
   created() {
     this.geCartList()
-    window.addEventListener('setItem', () => {
-      this.geCartList()
-    })
+  },
+  watch: {
+    cart: {
+      handler: function () {
+        this.geCartList()
+      }
+    }
   }
 }
 </script>
