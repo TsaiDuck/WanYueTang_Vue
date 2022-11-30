@@ -55,6 +55,10 @@ export default new Vuex.Store({
     updateCart(state, cart) {
       state.cart = cart
       state.cartState = true
+    },
+    clearCart(state) {
+      state.cart = []
+      state.cartState = false
     }
   },
   actions: {},

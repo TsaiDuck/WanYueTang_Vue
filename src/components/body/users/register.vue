@@ -94,7 +94,10 @@ export default {
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 2, max: 12, message: '长度在 2 到 12 个字符', trigger: 'blur' }
         ],
-        user_password: [{ validator: validatePass, trigger: 'blur' }],
+        user_password: [
+          { validator: validatePass, trigger: 'blur' },
+          { min: 6, max: 18, message: '长度再 6 - 18 个字符', trigger: 'blur' }
+        ],
         checkPass: [{ validator: validatePass2, trigger: 'blur' }],
         user_gender: [{ required: true, message: '请选择性别', trigger: 'blur' }],
         user_phone: [{ validator: validatePhone, trigger: 'blur' }]

@@ -12,7 +12,7 @@
       <button class="cartGoods-count-btn" @click="changeCount('add')">+</button>
     </div>
     <span class="cartGoods-subtotal">￥{{ (drugInfo.price * count).toFixed(2) }}</span>
-    <a href="javascript:;">移除该商品</a>
+    <span @click="deleteCart">移除该商品</span>
   </div>
 </template>
 
@@ -62,6 +62,22 @@ export default {
           } else console.log(err)
         })
     },
+    deleteCart() {
+      this.$http({
+        method: 'GET',
+        url: `/cart/delete?userid=${this.user.userId}&drugid=${this.drugInfo.id}`
+      })
+        .then(({ data: res }) => {
+          if (res.success) {
+            this.getCart()
+          }
+        })
+        .catch((err) => {
+          this.$alert(err.message, err.name, {
+            confirmButtonText: '取消'
+          })
+        })
+    },
     getCart() {
       this.$http({
         method: 'GET',
@@ -71,6 +87,7 @@ export default {
           if (res.success) {
             this.$store.commit('updateCart', res.data)
           } else {
+            this.$store.commit('clearCart')
           }
         })
         .catch((err) => {
@@ -79,6 +96,7 @@ export default {
           })
         })
     },
+
     stateChange(e) {
       const newState = e.target.checked
       // 触发自定义事件
@@ -140,9 +158,10 @@ export default {
     width: 50px;
     color: red;
   }
-  a {
+  span {
     color: darkgreen;
     text-decoration: none;
+    cursor: pointer;
   }
 }
 </style>

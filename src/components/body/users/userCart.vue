@@ -21,7 +21,7 @@
       <div class="userCart-content-show" v-if="cartState">
         <Cartgoods
           v-for="item in cartList"
-          :key="item.index"
+          :key="item.drugId"
           :id="item.drugId"
           :count="item.count"
           :isChecked="item.state"
@@ -56,7 +56,7 @@ export default {
     Cartgoods
   },
   computed: {
-    ...mapState(['cart', 'cartState']),
+    ...mapState(['cart', 'cartState', 'user']),
     fullState() {
       return this.cartList.every((item) => item.state)
     }
@@ -80,7 +80,7 @@ export default {
       this.getTotal()
     },
     // 获取购物车列表信息
-    geCartList() {
+    getCartList() {
       this.cartList = this.cart
     },
     // 获取复选框选择状态
@@ -116,15 +116,32 @@ export default {
             message: '取消支付'
           })
         })
+    },
+    getCart() {
+      this.$http({
+        method: 'GET',
+        url: `/cart/list?userid=${this.user.userId}`
+      })
+        .then(({ data: res }) => {
+          if (res.success) {
+            this.$store.commit('updateCart', res.data)
+          }
+        })
+        .catch((err) => {
+          this.$alert(err.message, err.name, {
+            confirmButtonText: '取消'
+          })
+        })
     }
   },
   created() {
-    this.geCartList()
+    this.getCart()
+    this.getCartList()
   },
   watch: {
     cart: {
       handler: function () {
-        this.geCartList()
+        this.getCartList()
       }
     }
   }
