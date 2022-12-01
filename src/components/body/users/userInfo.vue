@@ -35,7 +35,7 @@
           label-width="80px"
       >
         <el-form-item label="生日" prop="birth">
-          <el-date-picker v-model="formLabelAlign.birth" type="date" placeholder="选择日期" @blur="getAge" value-format="yyyy-MM-dd"> </el-date-picker>
+          <el-date-picker v-model="formLabelAlign.birth" type="date" placeholder="选择日期" @change="getAge" value-format="yyyy-MM-dd"> </el-date-picker>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="formLabelAlign.email"></el-input>
@@ -113,17 +113,17 @@ export default {
               .then(({data: res}) => {
                 console.log(res)
                 if(res.success){
-                  // this.login({
-                  //   name: res.data.name,
-                  //   pwd: res.data.pwd,
-                  //   id: res.data.id,
-                  //   sex: res.data.sex,
-                  //   phone: res.data.phone,
-                  //   userage: res.data.userage,
-                  //   birth: res.data.birth,
-                  //   email: res.data.email,
-                  //   address: res.data.address
-                  // })
+                  this.login({
+                    name: this.user.userName,
+                    pwd: this.user.userPwd,
+                    id: userInfo.id,
+                    sex: this.user.userGender,
+                    phone: this.user.userPhone,
+                    userage: userInfo.userage,
+                    birth: userInfo.birth,
+                    email: userInfo.email,
+                    address: userInfo.address
+                  })
                   this.$message("保存成功")
                   this.unchangeable = true
                 }
