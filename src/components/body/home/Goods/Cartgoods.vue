@@ -59,7 +59,7 @@ export default {
             this.$alert('请刷新页面重试', '服务器请求超时', {
               confirmButtonText: '确定'
             })
-          } else console.log(err)
+          }
         })
     },
     deleteCart() {

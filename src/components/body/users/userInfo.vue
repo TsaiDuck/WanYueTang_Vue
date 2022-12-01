@@ -111,14 +111,12 @@ export default {
             address: this.formLabelAlign.address,
             email: this.formLabelAlign.email
           }
-          console.log(userInfo)
           this.$http({
             method: 'POST',
             url: '/user/update',
             data: JSON.stringify(userInfo),
             headers: { 'Content-Type': 'application/json;charset=UTF-8' }          })
               .then(({data: res}) => {
-                console.log(res)
                 if(res.success){
                   this.login({
                     name: this.user.userName,

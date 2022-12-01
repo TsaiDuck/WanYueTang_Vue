@@ -98,24 +98,33 @@ export default {
     },
     // 结算
     purchase() {
-      this.$confirm(`您选择了${this.amount}件商品，总价为${this.totalPrice}，是否确定支付？`, '购物车结算', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'success',
-        center: true
-      })
-        .then(() => {
-          this.$message({
-            type: 'success',
-            message: '支付成功!'
-          })
+      if(this.amount == 0){
+        this.$confirm(`请选择商品进行结算`, '提示', {
+          confirmButtonText: '确定',
+          showCancelButton: false,
+          type: 'warning',
+          center: true
         })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消支付'
-          })
+      }else{
+        this.$confirm(`您选择了${this.amount}件商品，总价为${this.totalPrice}，是否确定支付？`, '购物车结算', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'success',
+          center: true
         })
+            .then(() => {
+              this.$message({
+                type: 'success',
+                message: '支付成功!'
+              })
+            })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '取消支付'
+              })
+            })
+      }
     },
     getCart() {
       this.$http({
