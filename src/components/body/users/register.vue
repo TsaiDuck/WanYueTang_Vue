@@ -132,7 +132,7 @@ export default {
                 this.open('注册成功!', '现在可以登录辣', '确定')
                 this.$router.push('/login')
               } else {
-                this.open('注册失败', '服务器发生问题了', '确定')
+                this.open('注册失败', '该用户名已被占用', '确定')
               }
             })
             .catch((err) => {

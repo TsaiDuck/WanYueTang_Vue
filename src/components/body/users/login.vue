@@ -77,7 +77,13 @@ export default {
             this.login({
               name: res.data.name,
               pwd: res.data.pwd,
-              id: res.data.id
+              id: res.data.id,
+              sex: res.data.sex,
+              phone: res.data.phone,
+              userage: res.data.userage,
+              birth: res.data.birth,
+              email: res.data.email,
+              address: res.data.address
             })
             this.getCart()
             this.$router.push('/Home')

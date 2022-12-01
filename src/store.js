@@ -11,7 +11,13 @@ export default new Vuex.Store({
       isLogin: false,
       userId: -1,
       userName: '',
-      userPwd: ''
+      userPwd: '',
+      userPhone: '',
+      userGender: '',
+      userEmail: '',
+      userAddress: '',
+      userBirth: '',
+      userAge: ''
     },
     drug: [],
     drugState: false,
@@ -26,12 +32,24 @@ export default new Vuex.Store({
       state.user.userPwd = payload.pwd
       state.user.userId = payload.id
       state.user.isLogin = true
+      state.user.userGender = payload.sex
+      state.user.userPhone = payload.phone
+      state.user.userAge = payload.userage
+      state.user.userBirth = payload.birth
+      state.user.userEmail = payload.email
+      state.user.userAddress = payload.address
     },
     logout(state) {
       state.user.userName = ''
       state.user.userPwd = ''
       state.user.userId = -1
       state.user.isLogin = false
+      state.user.userPhone = ''
+      state.user.userGender = ''
+      state.user.userAge = ''
+      state.user.userBirth = ''
+      state.user.userEmail = ''
+      state.user.userAddress = ''
       state.cart = []
       state.cartState = false
     },

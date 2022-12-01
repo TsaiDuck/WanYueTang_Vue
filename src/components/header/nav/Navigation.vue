@@ -11,7 +11,7 @@
         <li><a :class="{ active: hashPath === '/classify/fever' }" href="#/classify/fever">发热科</a></li>
         <li><a :class="{ active: hashPath === '/classify/digestion' }" href="#/classify/digestion">消化内科</a></li>
         <li><a :class="{ active: hashPath === '/classify/OGDepartment' }" href="#/classify/OGDepartment">妇产科</a></li>
-        <li><a :class="{ active: hashPath === '/classify/andrology' }" href="#/classify/andrology">乙肝</a></li>
+        <li><a :class="{ active: hashPath === '/classify/andrology' }" href="#/classify/andrology">乙肝专科</a></li>
       </ul>
     </div>
     <!-- 搜索框 -->
@@ -58,7 +58,8 @@ export default {
       hashPath: this.$route.path,
       showFlag: false,
       searchValue:'',
-      search: []
+      search: [],
+      id:''
     }
   },
   // 监听,当路由发生变化的时候执行
