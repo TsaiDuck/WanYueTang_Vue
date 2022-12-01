@@ -35,7 +35,8 @@
           label-width="80px"
       >
         <el-form-item label="生日" prop="birth">
-          <el-date-picker v-model="formLabelAlign.birth" type="date" placeholder="选择日期" @change="getAge" value-format="yyyy-MM-dd"> </el-date-picker>
+          <el-date-picker v-model="formLabelAlign.birth" type="date" placeholder="选择日期"
+          @change="getAge" value-format="yyyy-MM-dd" :picker-options="pickerOption"></el-date-picker>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="formLabelAlign.email"></el-input>
@@ -66,6 +67,12 @@ export default {
       }
     }
     return {
+      //限制生日只能选择当天及当天以前的日期
+      pickerOption: {
+        disabledDate(time){
+          return time.getTime()>Date.now() - 8.64e6
+        }
+      },
       labelPosition: 'left',
       unchangeable: true,
       //表单内容
@@ -133,10 +140,14 @@ export default {
     },
     getAge(){
       let birthdays = new Date(this.formLabelAlign.birth)
-      let date = new Date()
-      let age = date.getFullYear()-birthdays.getFullYear()-(date.getMonth()<birthdays.getMonth()) ||
-          (date.getMonth() == birthdays.getMonth() && date.getDay() < birthdays.getDay() ? 1 : 0)
-      this.formLabelAlign.age = age
+      if(birthdays == null){
+        this.formLabelAlign.age = null
+      }else{
+        let date = new Date()
+        let age = date.getFullYear()-birthdays.getFullYear()-(date.getMonth()<birthdays.getMonth()) ||
+            (date.getMonth() == birthdays.getMonth() && date.getDay() < birthdays.getDay() ? 1 : 0)
+        this.formLabelAlign.age = age
+      }
     },
     update() {
       this.$prompt('请输入您的密码以确认是本人', '提示', {
