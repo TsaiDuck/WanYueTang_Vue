@@ -87,6 +87,7 @@ export default {
     userLogout() {
       this.showFlag = false
       this.logout()
+      this.linkTo('/home')
     },
     getSearch() {
       this.linkTo('/search/'+ this.searchValue)

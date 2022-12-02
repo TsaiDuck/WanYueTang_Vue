@@ -46,7 +46,7 @@
         </el-form-item>
       </el-form>
       <div class="userInfo-content-button">
-        <el-button type="primary" @click="update">修改我的信息</el-button>
+        <el-button type="primary" @click="update" :disabled="changeable">修改我的信息</el-button>
         <el-button type="primary" @click="save" :disabled="unchangeable">保存</el-button>
       </div>
     </div>
@@ -75,6 +75,7 @@ export default {
       },
       labelPosition: 'left',
       unchangeable: true,
+      changeable: false,
       //表单内容
       formLabelAlign: {
         name: '',
@@ -129,8 +130,12 @@ export default {
                     email: userInfo.email,
                     address: userInfo.address
                   })
-                  this.$message("保存成功")
+                  this.$message({
+                    type: 'success',
+                    message: '保存成功'
+                  })
                   this.unchangeable = true
+                  this.changeable = false
                 }
               })
         }
@@ -160,9 +165,10 @@ export default {
         .then(() => {
           this.$message({
             type: 'success',
-            message: '请完善您的信息: '
+            message: '请完善您的信息'
           })
           this.unchangeable = false
+          this.changeable = true
         })
         .catch(() => {
           this.$message({

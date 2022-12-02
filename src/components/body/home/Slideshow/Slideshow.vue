@@ -56,17 +56,17 @@ export default {
         {
           id: 0,
           link: require('@/images/test/img1.jpg'),
-          url: '/register'
+          url: ''
         },
         {
           id: 1,
           link: require('@/images/test/img2.jpg'),
-          url: '/login'
+          url: ''
         },
         {
           id: 2,
           link: require('@/images/test/img1.jpg'),
-          url: '/home'
+          url: ''
         },
         {
           id: 3,
