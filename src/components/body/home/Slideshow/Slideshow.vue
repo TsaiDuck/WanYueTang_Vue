@@ -60,19 +60,19 @@ export default {
         },
         {
           id: 1,
-          link: require('@/images/test/img2.jpg'),
-          url: ''
+          link: require('@/images/test/img6.jpg'),
+          url: '/classify/fever'
         },
         {
           id: 2,
-          link: require('@/images/test/img1.jpg'),
-          url: ''
+          link: require('@/images/test/img5.webp'),
+          url: '/classify/andrology'
         },
         {
           id: 3,
           link: require('@/images/test/img2.jpg'),
-          url: '/home'
-        }
+          url: ''
+        },
       ]
     }
   },
@@ -137,7 +137,7 @@ li {
 }
 .showImg {
   position: relative;
-  width: 85%;
+  width: 83%;
   height: 530px;
   margin: 0 auto;
   overflow: hidden;
