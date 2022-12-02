@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="search" v-loading="loading">
     <div class="search-ok" v-if="searchState">
       <SearchGoods v-for="item in searchInfo" :key="item.id" :id="item.id"></SearchGoods>
     </div>
@@ -20,16 +20,19 @@ export default {
   data() {
     return {
       searchInfo: [],
-      searchState: false
+      searchState: false,
+      loading: true
     }
   },
   methods: {
     getSearch() {
+      this.loading = true
       this.$http({
         method: 'GET',
         url: `/get/search?searchKey=${this.$route.params.searchValue}`
       })
         .then(({ data: res }) => {
+          this.loading = false
           if (res.success) {
             this.searchInfo = res.data
             this.searchState = true
