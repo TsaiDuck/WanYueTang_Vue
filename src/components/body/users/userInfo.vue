@@ -58,8 +58,8 @@ import {mapMutations, mapState} from 'vuex'
 export default {
   data() {
     var validateEmail = (rule, value, callback) => {
-      var checker =
-        /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/
+      var checker = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+(.[a-zA-Z0-9]+)+$/
+        // /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/
       if (!checker.test(value)) {
         callback(new Error('请输入正确的邮箱！'))
       } else {
